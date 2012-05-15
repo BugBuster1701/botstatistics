@@ -1,0 +1,33 @@
+
+<div id="tl_buttons">
+    <a href="<?php echo $this->href; ?>" class="header_back" title="<?php echo $this->title; ?>"><?php echo $this->button; ?></a>
+</div>
+<div class="tl_panel">
+Auswahl Zähler-Modul
+    <div class="clear"></div>
+</div>
+<br> <br>
+<?php if (0==0) : //$this->visitorsanzcounter ?>
+	<table summary="Table lists records" class="mod_botstatistics_be_table_max">
+	<tbody>
+	<tr>
+	    <td class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['no_data']; ?></td>
+	</tr>
+	<tr>
+	    <td>&nbsp;</td>
+	</tr>
+	</tbody>
+	</table>
+<?php endif; ?>
+<br> <br>
+<div class="mod_botstatistics_be_version">
+	<table summary="Table lists version" class="mod_botstatistics_be_table_version">
+	<tbody>
+	<tr>
+	    <td style="padding-left: 2px; text-align:right;" class="tl_folder_tlist"><?php echo $this->botstatistics_version; ?></td>
+	</tr>
+	</tbody>
+	</table>
+</div>
+<br> <br>
+<span style="padding-left: 18px;"><?php echo $this->botstatistics_footer; ?></span>
