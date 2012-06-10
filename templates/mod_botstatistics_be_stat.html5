@@ -31,8 +31,8 @@
 </tbody>
 </table>
 <?php else: ?>
-<!-- gesamtem Zähler resetten -->   
 <div class="tl_formbody_edit">
+    <!-- gesamtem Zähler resetten -->
     <table summary="Table lists records" class="mod_botstatistics_be_table_max">
     <tbody>
     <tr>
@@ -52,10 +52,10 @@
     </tr>
     </tbody>
     </table>
-    <?php foreach ($this->bot_stats as $bot_stat) : ?>
-    <!-- Statistikdaten der einzelnen Bots -->
-    <?php //echo $bot_stat[0][0];?>
-    <div class="mod_botstatistics_be_counting_by_name">    
+    <!-- Statistikdaten der einzelnen Bots Name -->
+    
+    <div class="mod_botstatistics_be_counting_by_name">
+    <?php foreach ($this->bot_stats as $bot_stat) : ?>    
         <table summary="Table lists records" class="mod_botstatistics_be_table_max">
         <tbody>
         <tr>
@@ -73,9 +73,31 @@
         </tr>
         </tbody>
         </table>
-    </div>    
-    <?php //echo "<pre>".print_r($bot_stat,true)."</pre>"; ?><hr>
     <?php endforeach; ?>
+    </div>    
+    <!-- Statistikdaten der einzelnen Bots Datum -->
+    <div class="mod_botstatistics_be_counting_by_date">
+    <?php foreach ($this->bot_stats_date as $bot_stat) : ?>    
+        <table summary="Table lists records" class="mod_botstatistics_be_table_max">
+        <tbody>
+        <tr>
+            <td class="tl_folder_tlist" style="width: 80px;"><?php echo $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['date']; ?></td>
+            <td class="tl_folder_tlist" style="width: 130px;"><?php echo $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['name']; ?></td>
+            <td class="tl_folder_tlist" style="text-align: center;"><?php echo $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number']; ?></td>
+        </tr>
+        <?php foreach ($bot_stat as $dates) : ?>
+        <tr>
+            <td><?php echo $dates[0]; ?></td><td><?php echo $dates[1]; ?></td><td style="text-align: center;"><?php echo $dates[2]; ?></td>
+        </tr>
+        <?php endforeach; ?>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+        </tr>
+        </tbody>
+        </table>
+    <?php endforeach; ?>
+    </div>
+    <div class="clear"></div>
 </div>
 <?php endif; ?>
 <br> <br>

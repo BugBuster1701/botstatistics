@@ -23,7 +23,7 @@
  * @author     Glen Langer
  * @package    BotStatistics
  */
-class BotStatisticsHelper extends Backend
+class BotStatisticsHelper extends BackendModule
 {
     /**
 	 * Current object instance
@@ -31,15 +31,10 @@ class BotStatisticsHelper extends Backend
 	 */
     protected static $instance = null;
     
-    /**
-     * Constructor
-     */
-    protected function __construct()
+    protected function compile()
     {
-        $this->import("BackendUser");
-        parent::__construct();
+        
     }
-    
     /**
      * Return the current object instance (Singleton)
      * @return BotStatisticsHelper
@@ -116,5 +111,111 @@ class BotStatisticsHelper extends Backend
     
         return $strContent;
     } // checkExtension
+    
+    /**
+     * Timestamp nach Datum in deutscher oder internationaler Schreibweise
+     *
+     * @param	string		$language
+     * @param	insteger	$intTstamp
+     * @return	string
+     */
+    protected function parseDateBots($language='en', $intTstamp=null)
+    {
+        if ($language == 'de')
+        {
+            $strModified = 'd.m.Y';
+        }
+        else
+        {
+            $strModified = 'Y-m-d';
+        }
+        if (is_null($intTstamp))
+        {
+            $strDate = date($strModified);
+        }
+        elseif (!is_numeric($intTstamp))
+        {
+            return '';
+        }
+        else
+        {
+            $strDate = date($strModified, $intTstamp);
+        }
+        return $strDate;
+    }
+    
+    /**
+     * Fill Templatevars with Bot statistics order by name
+     */
+    protected function getBotStatBots()
+    {
+        //Anzahl Bots mit Namen
+        $objBotStatNameCount = $this->Database->prepare("SELECT  DISTINCT `bot_name`"
+                                                      . " FROM `tl_botstatistics_counter`"
+                                                      . " WHERE `bid`=?"
+                                                      . " ORDER BY `bot_name`")
+                                              ->execute($this->intModuleID);
+        $intBotStatNameCount = $objBotStatNameCount->numRows;
+        $this->Template->bot_stat_name_count = $intBotStatNameCount;
+        while ($objBotStatNameCount->next())
+        {
+            $arrBotNames[] = $objBotStatNameCount->bot_name;
+        
+            $objBotStat = $this->Database->prepare("SELECT `bot_date`, `bot_name`, `bot_counter`"
+                                                . " FROM `tl_botstatistics_counter`"
+                                                . " WHERE `bid`=? AND `bot_name`=?"
+                                                . " ORDER BY `bot_date` DESC")
+                                         ->execute($this->intModuleID,$objBotStatNameCount->bot_name);
+            while ($objBotStat->next())
+            {
+                $arrBotStats[$objBotStatNameCount->bot_name][] = array($objBotStatNameCount->bot_name
+                        ,$this->parseDateBots($GLOBALS['TL_LANGUAGE'],strtotime($objBotStat->bot_date))
+                        ,$objBotStat->bot_counter);
+            }
+        }
+        if ($intBotStatNameCount > 0)
+        {
+            $this->Template->bot_names = $arrBotNames;
+            $this->Template->bot_stats = $arrBotStats;
+        }
+        return ;
+    }
+    
+    /**
+     * Fill Templatevars with Bot statistics order by date
+     */
+    protected function getBotStatDate()
+    {
+        //Anzahl Bots mit Datum
+        $objBotStatDateCount = $this->Database->prepare("SELECT DISTINCT `bot_date`"
+                                                      . " FROM `tl_botstatistics_counter`"
+                                                      . " WHERE `bid`=?"
+                                                      . " ORDER BY `bot_date` DESC")
+                                              ->execute($this->intModuleID);
+        $intBotStatDateCount = $objBotStatDateCount->numRows;
+        $this->Template->bot_stat_date_count = $intBotStatDateCount;
+        while ($objBotStatDateCount->next())
+        {
+            $arrBotDates[] = $objBotStatDateCount->bot_date;
+        
+            $objBotStat = $this->Database->prepare("SELECT `bot_date`, `bot_name`, `bot_counter`"
+                                                 . " FROM `tl_botstatistics_counter`"
+                                                 . " WHERE `bid`=? AND `bot_date`=?"
+                                                 . " ORDER BY `bot_name` ASC")
+                                         ->execute($this->intModuleID,$objBotStatDateCount->bot_date);
+            while ($objBotStat->next())
+            {
+                $arrBotStats[$objBotStatDateCount->bot_date][] = array(
+                         $this->parseDateBots($GLOBALS['TL_LANGUAGE'],strtotime($objBotStat->bot_date))
+                        ,$objBotStat->bot_name
+                        ,$objBotStat->bot_counter);
+            }
+        }
+        if ($intBotStatDateCount > 0)
+        {
+            $this->Template->bot_stats_date = $arrBotStats;
+        }
+        return ;
+    }
     
 } // class

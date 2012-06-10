@@ -31,4 +31,10 @@
 
 .mod_botstatistics_be_counting_by_name {
   width:300px;
+  float: right;
+}
+
+.mod_botstatistics_be_counting_by_date {
+  width:300px;
+  float: left;
 }
