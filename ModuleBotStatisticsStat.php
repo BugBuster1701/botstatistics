@@ -129,7 +129,9 @@ class ModuleBotStatisticsStat extends BackendModule
     	        while ($objBotStat->next())
     	        {
     	            //$arrBotStats[$objBotStatNameCount->bot_name][$objBotStat->bot_date] = $objBotStat->bot_counter;
-    	            $arrBotStats[$objBotStatNameCount->bot_name][] = array($objBotStatNameCount->bot_name,$objBotStat->bot_date,$objBotStat->bot_counter);
+    	            $arrBotStats[$objBotStatNameCount->bot_name][] = array($objBotStatNameCount->bot_name
+    	                                                                  ,$this->parseDateBots($GLOBALS['TL_LANGUAGE'],strtotime($objBotStat->bot_date))
+    	                                                                  ,$objBotStat->bot_counter);
     	        }
 	        }
 	        if ($intBotStatNameCount > 0) 
