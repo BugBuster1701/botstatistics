@@ -12,10 +12,8 @@
  * @author     Glen Langer 
  * @package    BotStatistics 
  * @license    LGPL 
- * @filesource
  */
 
-define('BOTSTATISTICS_VERSION', '0.1');
+define('BOTSTATISTICS_VERSION', '0.2');
 define('BOTSTATISTICS_BUILD'  , '0');
 
-?>

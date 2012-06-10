@@ -94,5 +94,6 @@ array_insert($GLOBALS['FE_MOD']['miscellaneous'], 0, array
  * 
  * Use function array_insert() to modify an existing hooks array.
  */
- 
+$GLOBALS['TL_HOOKS']['parseBackendTemplate'][]  = array('BotStatisticsHelper', 'checkExtensions');
+
 ?>

@@ -106,6 +106,7 @@ class ModuleBotStatistics extends Module
 	    }
 	    
 	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch kein Eintrag vorhanden ist
+	    // durch Insert Ignore und Unique Key
 	    $arrSet = array
 	    (
 	            'bid'          => $bid,
@@ -141,7 +142,7 @@ class ModuleBotStatistics extends Module
 	    if (!in_array('botdetection', $this->Config->getActiveModules()))
 	    {
 	        //botdetection Modul fehlt, Abbruch
-	        $this->log('BotDetection extension required!', 'ModuleBotStatistics CheckBot', TL_ERROR);
+	        //$this->log('BotDetection extension required!', 'ModuleBotStatistics CheckBot', TL_ERROR);
 	        return false;
 	    }
 	    $this->import('ModuleBotDetection');

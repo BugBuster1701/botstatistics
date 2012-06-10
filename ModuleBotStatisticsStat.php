@@ -61,6 +61,16 @@ class ModuleBotStatisticsStat extends BackendModule
 		$this->Template->theme0 = 'default';
 		$this->Template->bot_base    = $this->Environment->base;
 		$this->Template->bot_base_be = $this->Environment->base . 'contao';
+		
+		if ($this->intModuleID == 0) 
+		{   //direkter Aufruf ohne ID
+		    $objBotModuleID = $this->Database->prepare("SELECT MIN(id) AS MID from tl_module WHERE `type`='botstatistics'")->execute();
+		    $objBotModuleID->next();
+		    if ($objBotModuleID->MID !== null) 
+		    {
+		        $this->intModuleID = $objBotModuleID->MID;
+		    }
+		}
 		$this->Template->bot_module_id = $this->intModuleID;
 		
 		
