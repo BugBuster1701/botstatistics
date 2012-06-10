@@ -46,7 +46,7 @@ $GLOBALS['BE_MOD']['system']['botstatistics'] = array
 (
         'callback'   => 'ModuleBotStatisticsStat',
         'icon'       => 'system/modules/botstatistics/html/botstatistics2.png',
-        'stylesheet' => 'system/modules/botstatistics/mod_botstatistics_be.css',
+        'stylesheet' => 'system/modules/botstatistics/html/mod_botstatistics_be.css',
 );
 
 /**

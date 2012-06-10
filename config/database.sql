@@ -21,7 +21,7 @@ CREATE TABLE `tl_botstatistics_counter` (
   `bot_name` varchar(60) NOT NULL default 'Unknown',
   `bot_counter` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
-  KEY `pid` (`pid`)
+  UNIQUE KEY `bid_date_name` (`bid`, `bot_date`, `bot_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 

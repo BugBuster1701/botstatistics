@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  * 
@@ -21,7 +21,8 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['botstatistics']   = 'name,type,headline;botstatistics_name;guests,protected;align,space,cssID';
+//$GLOBALS['TL_DCA']['tl_module']['palettes']['botstatistics']   = 'name,type,headline;botstatistics_name;guests,protected;align,space,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['botstatistics']   = 'name,type;botstatistics_name';
 
 
 
@@ -34,7 +35,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_name'] = array
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'search'                  => true,
-	'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'helpwizard'=>true)
+	'eval'                    => array('mandatory'=>true, 'maxlength'=>64)
 );
 
 

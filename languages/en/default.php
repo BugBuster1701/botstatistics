@@ -32,6 +32,14 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC'][''] = '';
-
-?>
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modname']    = 'Bot-Statistic Module';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modulename'] = 'Module name';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['footer']    = '';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['no_data']       = 'No data available for this module.';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['no_stat_data']  = 'No statistic data for this counter.';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['name']      = 'Name';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['date']      = 'Date';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number']    = 'Number';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['reset']         = 'Reset';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['zero']          = 'The statistic counters will be reset to zero for this module.';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['zero_confirm']  = 'Do you really want to reset the statistic counter for this module?';

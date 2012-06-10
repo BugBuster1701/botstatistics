@@ -37,9 +37,20 @@
 /**
  * Backend Statistik
  */
-$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modname']   = 'Bot-Statistik Modul';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modname']    = 'Bot-Statistik Modul';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modulename'] = 'Modulname';
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['footer']    = '';
-$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['no_data']       = 'Keine Daten vorhanden f&uuml;r diese Kategorie.';
-$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['no_stat_data']  = 'Keine Statistik Daten vorhanden f&uuml;r diesen Z&auml;hler.';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['no_data']       = 'Keine Daten vorhanden f&uuml;r dieses Modul.';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['no_stat_data']  = 'Keine Statistikdaten vorhanden f&uuml;r diesen Z&auml;hler.';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['name']      = 'Name';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['date']      = 'Datum';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number'] = 'Anzahl';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['reset']         = 'R&uuml;cksetzung';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['zero']          = 'Statistiken auf 0 setzen f&uuml;r diesen Z&auml;hler.';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['zero_confirm']  = 'Statistiken &uuml;ber die Bots wirklich auf 0 setzen f&uuml;r diesen Z&auml;hler?';
 
-?>
+
+
+
+
+
