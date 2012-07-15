@@ -26,6 +26,22 @@ CREATE TABLE `tl_botstatistics_counter` (
 
 
 -- --------------------------------------------------------
+ 
+-- 
+-- Table `tl_botstatistics_counter_details`
+-- 
+ 
+CREATE TABLE `tl_botstatistics_counter_details` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `pid` int(10) unsigned NOT NULL default '0',
+  `bot_page_alias` varchar(255) NOT NULL default 'Unknown',
+  `bot_page_alias_counter` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `pid_alias` (`pid`, `bot_page_alias`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    
+
+-- --------------------------------------------------------
 
 -- 
 -- Table `tl_botstatistics_blocker`
@@ -49,5 +65,6 @@ CREATE TABLE `tl_botstatistics_blocker` (
 
 CREATE TABLE `tl_module` (
   `botstatistics_name` varchar(64) NOT NULL default '',
+  `botstatistics_details` char(1) NOT NULL default '',
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;  
 

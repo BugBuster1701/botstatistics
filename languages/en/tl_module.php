@@ -19,5 +19,5 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['botstatistics_name'] = array('Module name', 'The name is for the choice of the statistics.');
+$GLOBALS['TL_LANG']['tl_module']['botstatistics_name'] = array('Module name for the statistics', 'The name is for the choice of the statistics.');
 

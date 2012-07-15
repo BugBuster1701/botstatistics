@@ -22,7 +22,7 @@
  * Add palettes to tl_module
  */
 //$GLOBALS['TL_DCA']['tl_module']['palettes']['botstatistics']   = 'name,type,headline;botstatistics_name;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['botstatistics']   = 'name,type;botstatistics_name';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['botstatistics']   = 'name,type;botstatistics_name,botstatistics_details';
 
 
 
@@ -35,8 +35,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_name'] = array
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'search'                  => true,
-	'eval'                    => array('mandatory'=>true, 'maxlength'=>64)
+	'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
 );
 
+$GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_details'] = array(
+        'label'		=> &$GLOBALS['TL_LANG']['tl_module']['botstatistics_details'],
+        'inputType'	=> 'checkbox',
+        'eval'      => array('mandatory'=>false, 'tl_class'=>'w50 m12')
+);
 
 ?>
