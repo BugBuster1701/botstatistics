@@ -150,7 +150,7 @@ class BotStatisticsHelper extends BackendModule
     protected function getBotStatBots()
     {
         //Anzahl Bots mit Namen
-        $objBotStatNameCount = $this->Database->prepare("SELECT  DISTINCT `bot_name`"
+        $objBotStatNameCount = $this->Database->prepare("SELECT DISTINCT `bot_name`"
                                                       . " FROM `tl_botstatistics_counter`"
                                                       . " WHERE `bid`=?"
                                                       . " ORDER BY `bot_name`")
@@ -216,6 +216,61 @@ class BotStatisticsHelper extends BackendModule
             $this->Template->bot_stats_date = $arrBotStats;
         }
         return ;
+    }
+    
+    protected function getBotStatSummary()
+    {
+        $today     = date('Y-m-d');
+        $yesterday = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
+        
+        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_summary.html5');
+        //Anzahl der Bots mit Summe Besuche und Seitenzugriffe
+        $objBotStatCount = $this->Database->prepare("SELECT count(distinct `bot_name`) AS AnzBot, 
+                                                    (SELECT sum(`bot_counter`) 
+                                                     FROM `tl_botstatistics_counter` 
+                                                     WHERE `bot_module_id`=?
+                                                    ) AS AnzVisits
+                                                    FROM `tl_botstatistics_counter` 
+                                                    WHERE `bot_module_id`=?")
+                                          ->execute($this->intModuleID, $this->intModuleID);
+        $this->TemplatePartial->AnzBot    = $objBotStatCount->AnzBot;
+        $this->TemplatePartial->AnzVisits = $objBotStatCount->AnzVisits;
+        $objBotStatCount = $this->Database->prepare("SELECT sum(`bot_page_alias_counter`) AS AnzPages
+                                                     FROM `tl_botstatistics_counter_details` d
+                                                     INNER JOIN `tl_botstatistics_counter` c ON d.pid = c.id
+                                                     WHERE c.`bot_module_id`=?")
+                                          ->execute($this->intModuleID);
+        $this->TemplatePartial->AnzPages = $objBotStatCount->AnzPages;
+        
+        //Anzahl Bots Heute/Gestern Besuche/Hits 
+        $objBotStatCount = $this->Database->prepare("SELECT `bot_date`, count(distinct `bot_name`) AS AnzBot
+                                                    , sum(`bot_counter`) AS AnzVisits
+                                                    FROM `tl_botstatistics_counter`
+                                                    WHERE `bot_module_id`=?
+                                                    AND `bot_date`>=?
+                                                    GROUP BY `bot_date`")
+                                          ->execute($this->intModuleID, $yesterday);
+        $this->TemplatePartial->AnzBotYesterday     = 0;
+        $this->TemplatePartial->AnzBotYesterdayDate = 0;
+        $this->TemplatePartial->AnzBotToday         = 0;
+        $this->TemplatePartial->AnzBotTodayDate     = 0;
+        while ($objBotStatCount->next())
+        {
+            if ($objBotStatCount->bot_date == $yesterday)
+            {
+                $this->TemplatePartial->AnzBotYesterday     = $objBotStatCount->AnzBot;
+                $this->TemplatePartial->AnzBotYesterdayDate = $objBotStatCount->bot_date;
+            }
+            if ($objBotStatCount->bot_date == $today) 
+            { 
+                $this->TemplatePartial->AnzBotToday     = $objBotStatCount->AnzBot;
+                $this->TemplatePartial->AnzBotTodayDate = $objBotStatCount->bot_date;
+            }
+        }
+        //Anzahl Besuche / Hits aktuell Woche, letzte Woche
+        
+        
+        return $this->TemplatePartial->parse();
     }
     
 } // class

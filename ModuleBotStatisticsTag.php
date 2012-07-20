@@ -27,20 +27,23 @@ class ModuleBotStatisticsTag extends Frontend
 {
 	protected $BotStatus = false;
 	protected $BotName   = '';
+	protected $CURDATE   = '';
 	
 	/**
 	 * Generate module
 	 */
 	public function replaceInsertTagsBotStatistics($strTag)
 	{
+	    require_once(TL_ROOT . '/system/modules/botstatistics/ModuleBotStatisticsVersion.php');
 	    $arrTag = trimsplit('::', $strTag);
 	    if ($arrTag[0] != 'cache_botstatistics')
 	    {
 	        return false; // nicht für uns
 	    }
 	    if (!isset($arrTag[2])) 
-	    {//TODO: Meldung im Systemlog
-	        log_message('replaceInsertTagsBotStatistics Tag-2 fehlt (count): ','debug.log');
+	    {
+	        $this->loadLanguageFile('tl_botstatistics');
+	        $this->log($GLOBALS['TL_LANG']['tl_botstatistics']['no_key'], 'ModuleBotStatisticsTag replaceInsertTagsBotStatistics '. BOTSTATISTICS_VERSION .'.'. BOTSTATISTICS_BUILD, 'ERROR');
 	        return false;  // da fehlt was
 	    }
         if (!isset($arrTag[3]) || strlen($arrTag[3])<1) 
@@ -50,9 +53,10 @@ class ModuleBotStatisticsTag extends Frontend
 	    if ($arrTag[2] == 'count')
 	    {
 	        $this->import('Database');
-	        $status = $this->setBotCounter( (int)$arrTag[1], $arrTag[3] ); // Modul ID, Page Alias
+	        $statusVisit  = $this->setBotCounter( (int)$arrTag[1] ); // Modul ID
+	        $statusDetail = $this->setBotCounterDetails( (int)$arrTag[1], $arrTag[3] ); // Modul ID, Page Alias
 	        
-	        if ($status == true)
+	        if ($statusVisit == true || $statusDetail == true)
 	        {
 	            return '<!-- c0n740 f0r3v3r '.$arrTag[3].' -->';
 	        }
@@ -61,17 +65,25 @@ class ModuleBotStatisticsTag extends Frontend
 	            return '<!-- n0 c0un7 '.$arrTag[3].' -->';
 	        }
 	    }
+	    else
+	    {
+	        $this->loadLanguageFile('tl_botstatistics');
+	        $this->log($GLOBALS['TL_LANG']['tl_botstatistics']['wrong_key'], 'ModuleBotStatisticsTag replaceInsertTagsBotStatistics '. BOTSTATISTICS_VERSION .'.'. BOTSTATISTICS_BUILD, 'ERROR');
+	        return false;  // da ist was falsch
+	    }
 	}// BotStatReplaceInsertTags
 	
 	/**
 	 * Insert/Update Counter
 	 */
-	protected function setBotCounter($bid,$page_alias)
+	protected function setBotCounter($bid)
 	{
+	    $visit = false;
 	    $ClientIP = bin2hex(sha1($bid . $this->Environment->remoteAddr,true)); // sha1 20 Zeichen, bin2hex 40 zeichen
 	    $BlockTime = 60; //Sekunden
-	    $CURDATE = date('Y-m-d');
+	    $this->CURDATE = date('Y-m-d');
 	    
+	    // Check Bot und setze $this->BotName
 	    if ($this->isSetBot() === false)
 	    {
 	        return false;
@@ -79,7 +91,7 @@ class ModuleBotStatisticsTag extends Frontend
 
 	    if ($this->BotName === false)
 	    {
-	        //keine Advanced Kennung :-(
+	        //Bot erkannt aber keine Advanced Kennung :-(
 	        $this->BotName = 'noname';
 	        return false; // vorerst nicht zählen (GitHub #13)
 	    }
@@ -106,7 +118,7 @@ class ModuleBotStatisticsTag extends Frontend
     	    $arrSet = array
     	    (
     	            'bid'          => $bid,
-    	            'bot_date'     => $CURDATE,
+    	            'bot_date'     => $this->CURDATE,
     	            'bot_name'     => $this->BotName,
     	            'bot_counter'  => 0
     	    );
@@ -118,7 +130,7 @@ class ModuleBotStatisticsTag extends Frontend
                                     	            ." WHERE bid=?"
                     	                            ." AND bot_date=?"
                                     	            ." AND bot_name=?")
-    	                          ->executeUncached($bid, $CURDATE, $this->BotName);
+    	                          ->executeUncached($bid, $this->CURDATE, $this->BotName);
     	    $objBotCounter->next();
     	    //zählen per update
     	    $this->Database->prepare("UPDATE tl_botstatistics_counter SET bot_counter=? WHERE id=?")
@@ -127,50 +139,54 @@ class ModuleBotStatisticsTag extends Frontend
     	    $this->Database->prepare("INSERT INTO tl_botstatistics_blocker"
     	                            ." SET bid=?, bot_tstamp=CURRENT_TIMESTAMP, bot_ip=?")
     	                   ->executeUncached($bid, $ClientIP);
+    	    $visit = true;
         }
-        
-        //Detail Zählung
-	    //detail on/off ermmitteln
-	    //tl_botstatistics_counter.id ermitteln als pid
-	    $objBotModul = $this->Database->prepare("SELECT tl_botstatistics_counter.id AS pid
-                                                       ,tl_module.botstatistics_details
-                                                FROM tl_botstatistics_counter
-                                                INNER JOIN tl_module ON tl_botstatistics_counter.bid=tl_module.id
-                                                WHERE tl_botstatistics_counter.bid=?
-                                                  AND tl_botstatistics_counter.bot_name=?
-                                                  AND tl_botstatistics_counter.bot_date=?")
-	                                  ->executeUncached($bid, $this->BotName, $CURDATE);
-	    $objBotModul->next();
-	    if ($objBotModul->botstatistics_details) 
-	    {
-	        $this->setBotCounterDetails($objBotModul->pid, $page_alias);
-	    }
-	    
-	    return true;
+	    return $visit;
 	} //BotCountUpdate
 	
 	/**
 	 * Insert/Update Counter Details
 	 */
-	protected function setBotCounterDetails($pid,$page_alias)
+	protected function setBotCounterDetails($bid,$page_alias)
 	{
-	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch kein Eintrag vorhanden ist
-	    // durch Insert Ignore und Unique Key
-	    $arrSet = array
-	    (
-	            'id'  => 0,
-	            'pid' => $pid,
-	            'bot_page_alias'         => $page_alias,
-	            'bot_page_alias_counter' => 0
-	    );
-	    $this->Database->prepare("INSERT IGNORE INTO tl_botstatistics_counter_details %s")
-	                   ->set($arrSet)->executeUncached();
+	    if ($this->BotName === false)
+	    {
+	        return false; // vorerst nicht zählen (GitHub #13)
+	    }
 	    
-	    $this->Database->prepare("UPDATE tl_botstatistics_counter_details 
-                                  SET bot_page_alias_counter=bot_page_alias_counter+1
-                                  WHERE pid=? AND bot_page_alias=?")
-                       ->executeUncached($pid,$page_alias);
-	    return true;
+	    //Detail Zählung
+	    //detail on/off ermmitteln
+	    //tl_botstatistics_counter.id ermitteln als pid
+	    $objBotModul = $this->Database->prepare("SELECT tl_botstatistics_counter.id AS pid
+                                        	            ,tl_module.botstatistics_details
+                        	            FROM tl_botstatistics_counter
+                        	            INNER JOIN tl_module ON tl_botstatistics_counter.bid=tl_module.id
+                        	            WHERE tl_botstatistics_counter.bid=?
+                        	            AND tl_botstatistics_counter.bot_name=?
+                        	            AND tl_botstatistics_counter.bot_date=?")
+                        	          ->executeUncached($bid, $this->BotName, $this->CURDATE);
+	    $objBotModul->next();
+	    if ($objBotModul->botstatistics_details)
+	    {
+    	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch kein Eintrag vorhanden ist
+    	    // durch Insert Ignore und Unique Key
+    	    $arrSet = array
+    	    (
+    	            'id'  => 0,
+    	            'pid' => $objBotModul->pid,
+    	            'bot_page_alias'         => $page_alias,
+    	            'bot_page_alias_counter' => 0
+    	    );
+    	    $this->Database->prepare("INSERT IGNORE INTO tl_botstatistics_counter_details %s")
+    	                   ->set($arrSet)->executeUncached();
+    	    
+    	    $this->Database->prepare("UPDATE tl_botstatistics_counter_details 
+                                      SET bot_page_alias_counter=bot_page_alias_counter+1
+                                      WHERE pid=? AND bot_page_alias=?")
+                           ->executeUncached($objBotModul->pid,$page_alias);
+    	    return true;
+    	}
+	    return false;
 	}
 	
 	/**
@@ -180,8 +196,7 @@ class ModuleBotStatisticsTag extends Frontend
 	{
 	    if (!in_array('botdetection', $this->Config->getActiveModules()))
 	    {
-	        //botdetection Modul fehlt, Abbruch
-	        //$this->log('BotDetection extension required!', 'ModuleBotStatistics CheckBot', TL_ERROR);
+	        //botdetection Modul fehlt, Abbruch, Meldung kommt bereits per Hook
 	        return false;
 	    }
 	    $this->import('ModuleBotDetection');

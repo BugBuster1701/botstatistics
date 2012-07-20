@@ -16,7 +16,7 @@
 
 CREATE TABLE `tl_botstatistics_counter` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `bid` int(10) unsigned NOT NULL default '0',
+  `bot_module_id` int(10) unsigned NOT NULL default '0',
   `bot_date` date NOT NULL default '1999-01-01',
   `bot_name` varchar(60) NOT NULL default 'Unknown',
   `bot_counter` int(10) unsigned NOT NULL default '0',

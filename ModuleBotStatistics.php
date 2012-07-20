@@ -57,17 +57,12 @@ class ModuleBotStatistics extends Module
 	 */
 	protected function compile()
 	{
-	    //$this->import('Database');
-	    //log_message('BotCountUpdate Aufruf mit ID: '.$this->id,'debug.log');
-	    /*
-	    $this->BotCountUpdate($this->id); // Modul ID
-	    return;
-	    */
 	    global $objPage; // for alias
-	    
 	    $arrBotStatistics = array();
-	    $arrBotStatistics['BotStatisticsID'] = $this->id;
+	    
+	    $arrBotStatistics['BotStatisticsID'] = $this->id; // Modul ID
 	    $arrBotStatistics['PageAlias']       = $objPage->alias;
+
 	    $this->Template->botstatistics = $arrBotStatistics;
 	}
 	
