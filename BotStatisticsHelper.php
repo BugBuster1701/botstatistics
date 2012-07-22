@@ -222,8 +222,16 @@ class BotStatisticsHelper extends BackendModule
     {
         $today     = date('Y-m-d');
         $yesterday = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
+
+        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_summary');
         
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_summary.html5');
+        $this->TemplatePartial->AnzBotYesterday    = 0;
+        $this->TemplatePartial->AnzVisitsYesterday = 0;
+        $this->TemplatePartial->AnzPagesYesterday  = 0;
+        $this->TemplatePartial->AnzBotToday        = 0;
+        $this->TemplatePartial->AnzVisitsToday     = 0;
+        $this->TemplatePartial->AnzPagesToday      = 0;
+        
         //Anzahl der Bots mit Summe Besuche und Seitenzugriffe
         $objBotStatCount = $this->Database->prepare("SELECT count(distinct `bot_name`) AS AnzBot, 
                                                     (SELECT sum(`bot_counter`) 
@@ -250,24 +258,79 @@ class BotStatisticsHelper extends BackendModule
                                                     AND `bot_date`>=?
                                                     GROUP BY `bot_date`")
                                           ->execute($this->intModuleID, $yesterday);
-        $this->TemplatePartial->AnzBotYesterday     = 0;
-        $this->TemplatePartial->AnzBotYesterdayDate = 0;
-        $this->TemplatePartial->AnzBotToday         = 0;
-        $this->TemplatePartial->AnzBotTodayDate     = 0;
         while ($objBotStatCount->next())
         {
             if ($objBotStatCount->bot_date == $yesterday)
             {
-                $this->TemplatePartial->AnzBotYesterday     = $objBotStatCount->AnzBot;
-                $this->TemplatePartial->AnzBotYesterdayDate = $objBotStatCount->bot_date;
+                $this->TemplatePartial->AnzBotYesterday    = $objBotStatCount->AnzBot;
+                $this->TemplatePartial->AnzVisitsYesterday = $objBotStatCount->AnzVisits;
+                
             }
             if ($objBotStatCount->bot_date == $today) 
             { 
-                $this->TemplatePartial->AnzBotToday     = $objBotStatCount->AnzBot;
-                $this->TemplatePartial->AnzBotTodayDate = $objBotStatCount->bot_date;
+                $this->TemplatePartial->AnzBotToday    = $objBotStatCount->AnzBot;
+                $this->TemplatePartial->AnzVisitsToday = $objBotStatCount->AnzVisits;
             }
         }
+        // Anzahl Seiten Gesamt - Heute/Gestern
+        $objBotStatCount = $this->Database->prepare("SELECT `bot_date`, sum(`bot_page_alias_counter`) AS AnzPages 
+                                                    FROM `tl_botstatistics_counter`
+                                                    INNER JOIN `tl_botstatistics_counter_details`
+                                                    ON `tl_botstatistics_counter`.id=`tl_botstatistics_counter_details`.pid
+                                                    WHERE `bot_module_id`=? 
+                                                    AND `bot_date`>=?
+                                                    GROUP BY `bot_date`")
+                                ->execute($this->intModuleID, $yesterday);
+        while ($objBotStatCount->next())
+        {
+            if ($objBotStatCount->bot_date == $yesterday)
+            {
+                $this->TemplatePartial->AnzPagesYesterday = $objBotStatCount->AnzPages;
+        
+            }
+            if ($objBotStatCount->bot_date == $today)
+            {
+                $this->TemplatePartial->AnzPagesToday = $objBotStatCount->AnzPages;
+            }
+        }
+        
         //Anzahl Besuche / Hits aktuell Woche, letzte Woche
+        $this->TemplatePartial->AnzBotWeek    = 0;
+        $this->TemplatePartial->AnzVisitsWeek = 0;
+        $this->TemplatePartial->AnzPagesWeek  = 0;
+        $this->TemplatePartial->AnzBotLastWeek    = 0;
+        $this->TemplatePartial->AnzVisitsLastWeek = 0;
+        $this->TemplatePartial->AnzPagesLastWeek  = 0;
+
+        $CurrentWeek       = date('W'); 
+        $LastWeek          = date('W', mktime(0, 0, 0, date("m"), date("d")-7, date("Y")) );
+        //Besonderheit beachten das der 1.1. die 53. Woche sein kann!
+        $YearCurrentWeek   = ($CurrentWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
+        $YearLastWeek      = ($LastWeek    > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
+        $objBotStatCount = $this->Database->prepare("SELECT YEARWEEK( `bot_date`, 3 ) AS YW
+                                                    , COUNT(DISTINCT `bot_name`) AS AnzBotWeek 
+                                                    , SUM(`bot_counter`) AS AnzVisitsWeek 
+                                                    FROM `tl_botstatistics_counter`
+                                                    WHERE `bot_module_id`=?
+                                                    AND YEARWEEK( `bot_date`, 3 ) BETWEEN ? AND ?
+                                                    GROUP BY YW
+                                                    ORDER BY YW DESC")
+                                ->execute($this->intModuleID, $YearLastWeek.$LastWeek, $YearCurrentWeek.$CurrentWeek);
+        while ($objBotStatCount->next())
+        {
+            if ($objBotStatCount->YW == $YearLastWeek.$CurrentWeek)
+            {
+                $this->TemplatePartial->AnzBotWeek    = $objBotStatCount->AnzBotWeek;
+                $this->TemplatePartial->AnzVisitsWeek = $objBotStatCount->AnzVisitsWeek;
+            
+            }
+            if ($objBotStatCount->YW == $YearLastWeek.$LastWeek)
+            {
+                $this->TemplatePartial->AnzBotLastWeek    = $objBotStatCount->AnzBotWeek;
+                $this->TemplatePartial->AnzVisitsLastWeek = $objBotStatCount->AnzVisitsWeek;
+            }
+        }
+        
         
         
         return $this->TemplatePartial->parse();

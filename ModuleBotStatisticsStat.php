@@ -110,8 +110,9 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 	    //Modul Werte holen
 	    if ($intBotModules > 0)
 	    {
-	        $this->getBotStatBots(); // Bots order by name
-	        $this->getBotStatDate(); // Bots order by date
+	        //$this->getBotStatBots(); // Bots order by name
+	        //$this->getBotStatDate(); // Bots order by date
+	        $this->Template->BotSummary = $this->getBotStatSummary();
 	    }
 
 	} // compile

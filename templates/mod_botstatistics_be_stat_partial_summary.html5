@@ -1,0 +1,45 @@
+<!-- getBotStatSummary::start -->
+<div class="mod_botstatistics_be_summary"> 
+	<table summary="Table lists records" class="mod_botstatistics_be_table_max">
+  	<tbody>
+    <tr>
+			<td class="tl_folder_tlist" style="width: 120px; padding-left: 2px; text-align: left;">&nbsp;Zeitraum</td>
+			<td class="tl_folder_tlist" style="min-width: 70px;  padding-right: 5px; text-align: right;">Anzahl Bots</td>
+			<td class="tl_folder_tlist" style="min-width: 70px;  padding-right: 5px; text-align: right;">Besuche (Scans)</td>
+			<td class="tl_folder_tlist" style="min-width: 70px;  padding-right: 5px; text-align: right;">Zugriffe (Seiten)</td>
+		</tr>
+		<tr>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: left;">Gesamtzahl</td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzBot; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzVisits; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzPages; ?></td>
+		</tr>	
+		<tr>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: left;">Heute</td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzBotToday; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzVisitsToday; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzPagesToday; ?></td>
+		</tr>
+		<tr>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: left;">Gestern</td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzBotYesterday; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzVisitsYesterday; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzPagesYesterday; ?></td>
+		</tr>
+		<tr>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: left;">aktuelle Woche</td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzBotWeek; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzVisitsWeek; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzPagesWeek; ?></td>
+		</tr>
+		<tr>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: left;">letzte Woche</td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzBotLastWeek; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzVisitsLastWeek; ?></td>
+			<td class="tl_file_list" style="padding-left: 2px; text-align: right;"><?php echo $this->AnzPagesLastWeek; ?></td>
+		</tr>
+		</tbody>
+	</table>
+
+</div>
+<!-- getBotStatSummary::stop -->

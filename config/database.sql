@@ -21,7 +21,7 @@ CREATE TABLE `tl_botstatistics_counter` (
   `bot_name` varchar(60) NOT NULL default 'Unknown',
   `bot_counter` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `bid_date_name` (`bid`, `bot_date`, `bot_name`)
+  UNIQUE KEY `bid_date_name` (`bot_module_id`, `bot_date`, `bot_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -49,11 +49,11 @@ CREATE TABLE `tl_botstatistics_counter_details` (
 
 CREATE TABLE `tl_botstatistics_blocker` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `bid` int(10) unsigned NOT NULL default '0',
+  `bot_module_id` int(10) unsigned NOT NULL default '0',
   `bot_tstamp` timestamp NULL default NULL,
   `bot_ip` varchar(40) NOT NULL default '0.0.0.0',
   PRIMARY KEY  (`id`),
-  KEY `bid` (`bid`)
+  KEY `bot_module_id` (`bot_module_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 

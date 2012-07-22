@@ -99,13 +99,13 @@ class ModuleBotStatisticsTag extends Frontend
 	    //Bot Blocker
 	    $this->Database->prepare("DELETE FROM tl_botstatistics_blocker"
                 	            ." WHERE CURRENT_TIMESTAMP - INTERVAL ? SECOND > bot_tstamp"
-                	            ." AND bid=?")
+                	            ." AND bot_module_id=?")
                        ->executeUncached($BlockTime, $bid);
 	    
 	    //Test ob Bot Visits gesetzt werden muessen
 	    $objBotIP = $this->Database->prepare("SELECT id"
                             	            ." FROM tl_botstatistics_blocker"
-                            	            ." WHERE bid=? AND bot_ip=?")
+                            	            ." WHERE bot_module_id=? AND bot_ip=?")
                             	   ->limit(1)
 	                               ->executeUncached($bid, $ClientIP);
 	    
@@ -117,7 +117,7 @@ class ModuleBotStatisticsTag extends Frontend
     	    // durch Insert Ignore und Unique Key
     	    $arrSet = array
     	    (
-    	            'bid'          => $bid,
+    	            'bot_module_id'=> $bid,
     	            'bot_date'     => $this->CURDATE,
     	            'bot_name'     => $this->BotName,
     	            'bot_counter'  => 0
@@ -127,7 +127,7 @@ class ModuleBotStatisticsTag extends Frontend
     	    //Bot Visits lesen
     	    $objBotCounter = $this->Database->prepare("SELECT id, bot_counter"
                                     	            ." FROM tl_botstatistics_counter"
-                                    	            ." WHERE bid=?"
+                                    	            ." WHERE bot_module_id=?"
                     	                            ." AND bot_date=?"
                                     	            ." AND bot_name=?")
     	                          ->executeUncached($bid, $this->CURDATE, $this->BotName);
@@ -137,7 +137,7 @@ class ModuleBotStatisticsTag extends Frontend
     	                   ->executeUncached($objBotCounter->bot_counter +1, $objBotCounter->id);
     	    //blocken
     	    $this->Database->prepare("INSERT INTO tl_botstatistics_blocker"
-    	                            ." SET bid=?, bot_tstamp=CURRENT_TIMESTAMP, bot_ip=?")
+    	                            ." SET bot_module_id=?, bot_tstamp=CURRENT_TIMESTAMP, bot_ip=?")
     	                   ->executeUncached($bid, $ClientIP);
     	    $visit = true;
         }
@@ -160,8 +160,8 @@ class ModuleBotStatisticsTag extends Frontend
 	    $objBotModul = $this->Database->prepare("SELECT tl_botstatistics_counter.id AS pid
                                         	            ,tl_module.botstatistics_details
                         	            FROM tl_botstatistics_counter
-                        	            INNER JOIN tl_module ON tl_botstatistics_counter.bid=tl_module.id
-                        	            WHERE tl_botstatistics_counter.bid=?
+                        	            INNER JOIN tl_module ON tl_botstatistics_counter.bot_module_id=tl_module.id
+                        	            WHERE tl_botstatistics_counter.bot_module_id=?
                         	            AND tl_botstatistics_counter.bot_name=?
                         	            AND tl_botstatistics_counter.bot_date=?")
                         	          ->executeUncached($bid, $this->BotName, $this->CURDATE);
