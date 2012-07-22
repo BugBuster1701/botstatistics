@@ -146,7 +146,7 @@ class BotStatisticsHelper extends BackendModule
     
     /**
      * Fill Templatevars with Bot statistics order by name
-     */
+     *//*
     protected function getBotStatBots()
     {
         //Anzahl Bots mit Namen
@@ -179,11 +179,11 @@ class BotStatisticsHelper extends BackendModule
             $this->Template->bot_stats = $arrBotStats;
         }
         return ;
-    }
+    }*/
     
     /**
      * Fill Templatevars with Bot statistics order by date
-     */
+     *//*
     protected function getBotStatDate()
     {
         //Anzahl Bots mit Datum
@@ -216,7 +216,7 @@ class BotStatisticsHelper extends BackendModule
             $this->Template->bot_stats_date = $arrBotStats;
         }
         return ;
-    }
+    }*/
     
     protected function getBotStatSummary()
     {
@@ -242,14 +242,14 @@ class BotStatisticsHelper extends BackendModule
                                                     WHERE `bot_module_id`=?")
                                           ->execute($this->intModuleID, $this->intModuleID);
         $this->TemplatePartial->AnzBot    = $objBotStatCount->AnzBot;
-        $this->TemplatePartial->AnzVisits = $objBotStatCount->AnzVisits;
+        $this->TemplatePartial->AnzVisits = ($objBotStatCount->AnzVisits) ? $objBotStatCount->AnzVisits : 0;
         //Anzahl Seitenzugriffe
         $objBotStatCount = $this->Database->prepare("SELECT sum(`bot_page_alias_counter`) AS AnzPages
                                                      FROM `tl_botstatistics_counter_details` d
                                                      INNER JOIN `tl_botstatistics_counter` c ON d.pid = c.id
                                                      WHERE c.`bot_module_id`=?")
                                           ->execute($this->intModuleID);
-        $this->TemplatePartial->AnzPages = $objBotStatCount->AnzPages;
+        $this->TemplatePartial->AnzPages = ($objBotStatCount->AnzPages) ? $objBotStatCount->AnzPages : 0;
         
         //Anzahl Bots Heute/Gestern Besuche/Hits 
         $objBotStatCount = $this->Database->prepare("SELECT `bot_date`, count(distinct `bot_name`) AS AnzBot

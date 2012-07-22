@@ -44,6 +44,11 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 	    parent::__construct();
 	    
 	    $this->intModuleID = (int)$this->Input->post('bot_module_id'); //Modul-ID
+	    //act=zero&zid=27
+	    if ($this->Input->get('act',true)=='zero') 
+	    {
+	        $this->setZero();
+	    }
 	}
 	
 	/**
@@ -117,7 +122,26 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 
 	} // compile
 	
-	
+	/**
+	 * Statistic, set on zero
+	 */
+	protected function setZero()
+	{
+	    if ( is_numeric($this->Input->get('zid')) && $this->Input->get('zid') > 0 ) 
+	    {
+	        $module_id = $this->Input->get('zid');
+	    }
+	    else 
+	    {
+	        return ; // wrong zid
+	    }
+	    $objStatDelete = $this->Database->prepare("DELETE FROM `tl_botstatistics_counter`, `tl_botstatistics_counter_details` 
+                                                    USING `tl_botstatistics_counter`, `tl_botstatistics_counter_details` 
+                                                    WHERE `tl_botstatistics_counter`.`id` = `tl_botstatistics_counter_details`.`pid`
+                                                    AND `tl_botstatistics_counter`.`bot_module_id`=?")
+                                        ->execute($module_id);
+	    return ;
+	}
 
 	
 }

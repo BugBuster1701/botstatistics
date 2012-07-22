@@ -1,5 +1,14 @@
 <!-- getBotStatSummary::start -->
-<div class="mod_botstatistics_be_summary"> 
+<div class="mod_botstatistics_be_summary">
+<?php if ($this->AnzBot == 0) : ?>
+    <table summary="Table lists records" class="mod_botstatistics_be_table_max">
+    <tbody>
+    <tr>
+        <td class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['no_stat_data']; ?></td>
+    </tr>
+    </tbody>
+    </table>
+<?php else: ?> 
 	<table summary="Table lists records" class="mod_botstatistics_be_table_max">
   	<tbody>
     <tr>
@@ -40,6 +49,6 @@
 		</tr>
 		</tbody>
 	</table>
-
+<?php endif; ?>
 </div>
 <!-- getBotStatSummary::stop -->
