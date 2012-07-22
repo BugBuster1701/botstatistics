@@ -243,6 +243,7 @@ class BotStatisticsHelper extends BackendModule
                                           ->execute($this->intModuleID, $this->intModuleID);
         $this->TemplatePartial->AnzBot    = $objBotStatCount->AnzBot;
         $this->TemplatePartial->AnzVisits = $objBotStatCount->AnzVisits;
+        //Anzahl Seitenzugriffe
         $objBotStatCount = $this->Database->prepare("SELECT sum(`bot_page_alias_counter`) AS AnzPages
                                                      FROM `tl_botstatistics_counter_details` d
                                                      INNER JOIN `tl_botstatistics_counter` c ON d.pid = c.id
@@ -294,7 +295,7 @@ class BotStatisticsHelper extends BackendModule
             }
         }
         
-        //Anzahl Besuche / Hits aktuell Woche, letzte Woche
+        //Anzahl Besuche aktuelle Woche, letzte Woche
         $this->TemplatePartial->AnzBotWeek    = 0;
         $this->TemplatePartial->AnzVisitsWeek = 0;
         $this->TemplatePartial->AnzPagesWeek  = 0;
@@ -302,11 +303,11 @@ class BotStatisticsHelper extends BackendModule
         $this->TemplatePartial->AnzVisitsLastWeek = 0;
         $this->TemplatePartial->AnzPagesLastWeek  = 0;
 
-        $CurrentWeek       = date('W'); 
-        $LastWeek          = date('W', mktime(0, 0, 0, date("m"), date("d")-7, date("Y")) );
+        $CurrentWeek     = date('W'); 
+        $LastWeek        = date('W', mktime(0, 0, 0, date("m"), date("d")-7, date("Y")) );
         //Besonderheit beachten das der 1.1. die 53. Woche sein kann!
-        $YearCurrentWeek   = ($CurrentWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
-        $YearLastWeek      = ($LastWeek    > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
+        $YearCurrentWeek = ($CurrentWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
+        $YearLastWeek    = ($LastWeek    > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
         $objBotStatCount = $this->Database->prepare("SELECT YEARWEEK( `bot_date`, 3 ) AS YW
                                                     , COUNT(DISTINCT `bot_name`) AS AnzBotWeek 
                                                     , SUM(`bot_counter`) AS AnzVisitsWeek 
@@ -318,7 +319,7 @@ class BotStatisticsHelper extends BackendModule
                                 ->execute($this->intModuleID, $YearLastWeek.$LastWeek, $YearCurrentWeek.$CurrentWeek);
         while ($objBotStatCount->next())
         {
-            if ($objBotStatCount->YW == $YearLastWeek.$CurrentWeek)
+            if ($objBotStatCount->YW == $YearCurrentWeek.$CurrentWeek)
             {
                 $this->TemplatePartial->AnzBotWeek    = $objBotStatCount->AnzBotWeek;
                 $this->TemplatePartial->AnzVisitsWeek = $objBotStatCount->AnzVisitsWeek;
@@ -330,8 +331,27 @@ class BotStatisticsHelper extends BackendModule
                 $this->TemplatePartial->AnzVisitsLastWeek = $objBotStatCount->AnzVisitsWeek;
             }
         }
+        //Anzahl Hits aktuelle, letzte Woche
+        $objBotStatCount = $this->Database->prepare("SELECT YEARWEEK( c.`bot_date`, 3 ) AS YW, sum(d.`bot_page_alias_counter`) AS AnzPages
+                                                    FROM `tl_botstatistics_counter` c
+                                                    INNER JOIN  `tl_botstatistics_counter_details` d ON c.id=d.pid
+                                                    WHERE c.`bot_module_id`=?
+                                                    AND YEARWEEK( c.`bot_date`, 3 ) BETWEEN ? AND ?
+                                                    GROUP BY YW
+                                                    ORDER BY YW DESC")
+                                          ->execute($this->intModuleID, $YearLastWeek.$LastWeek, $YearCurrentWeek.$CurrentWeek);
+        while ($objBotStatCount->next())
+        {
+            if ($objBotStatCount->YW == $YearCurrentWeek.$CurrentWeek)
+            {
+                $this->TemplatePartial->AnzPagesWeek = $objBotStatCount->AnzPages;
         
-        
+            }
+            if ($objBotStatCount->YW == $YearLastWeek.$LastWeek)
+            {
+                $this->TemplatePartial->AnzPagesLastWeek = $objBotStatCount->AnzPages;
+            }
+        }
         
         return $this->TemplatePartial->parse();
     }
