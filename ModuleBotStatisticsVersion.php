@@ -14,6 +14,6 @@
  * @license    LGPL 
  */
 
-define('BOTSTATISTICS_VERSION', '0.3');
+define('BOTSTATISTICS_VERSION', '0.5');
 define('BOTSTATISTICS_BUILD'  , '0');
 
