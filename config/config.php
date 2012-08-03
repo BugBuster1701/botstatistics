@@ -97,4 +97,18 @@ array_insert($GLOBALS['FE_MOD']['miscellaneous'], 0, array
 $GLOBALS['TL_HOOKS']['parseBackendTemplate'][]  = array('BotStatisticsHelper', 'checkExtensions');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('ModuleBotStatisticsTag', 'replaceInsertTagsBotStatistics');
 
+
+/**
+ * -------------------------------------------------------------------------
+ * CRON JOBS
+ * -------------------------------------------------------------------------
+ *
+ * Register methods to be executed at certain intervals.
+ *
+ *   weekly = run once a week
+ *   daily  = run once a day
+ *   hourly = run every hour
+ */
+$GLOBALS['TL_CRON']['daily'][]  = array('BotStatisticsCron', 'deleteStatisticsData');
+
 ?>

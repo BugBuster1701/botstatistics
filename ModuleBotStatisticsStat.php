@@ -44,7 +44,7 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 	    parent::__construct();
 	    
 	    $this->intModuleID = (int)$this->Input->post('bot_module_id'); //Modul-ID
-	    //act=zero&zid=27
+	    //act=zero&zid=...
 	    if ($this->Input->get('act',true)=='zero') 
 	    {
 	        $this->setZero();
@@ -115,8 +115,6 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 	    //Modul Werte holen
 	    if ($intBotModules > 0)
 	    {
-	        //$this->getBotStatBots(); // Bots order by name
-	        //$this->getBotStatDate(); // Bots order by date
 	        $this->Template->BotSummary = $this->getBotStatSummary();
 	    }
 
@@ -142,7 +140,6 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
                                         ->execute($module_id);
 	    return ;
 	}
-
 	
 }
 ?>

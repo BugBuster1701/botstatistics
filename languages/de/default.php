@@ -59,7 +59,3 @@ $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_bots']   = 'Anzahl u
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_visit']  = 'Anzahl Besuche (Scans)';
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_hit']    = 'Anzahl Zugriffe (Seiten)';
 
-
-
-
-

@@ -24,3 +24,8 @@
  */
 $GLOBALS['TL_LANG']['tl_botstatistics']['wrong_key']   = 'Faulty or incorrect tag name (parameter 2)';
 $GLOBALS['TL_LANG']['tl_botstatistics']['no_key']      = 'Tag name was not specified (parameter 2)';
+
+/**
+ * BotStatisticsDetails
+ */
+$GLOBALS['TL_LANG']['tl_botstatistics']['wrong_parameter'] = 'Faulty or incorrect parameter';

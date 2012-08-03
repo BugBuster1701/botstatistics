@@ -65,6 +65,6 @@ CREATE TABLE `tl_botstatistics_blocker` (
 
 CREATE TABLE `tl_module` (
   `botstatistics_name` varchar(64) NOT NULL default '',
-  `botstatistics_details` char(1) NOT NULL default '',
+  `botstatistics_cron` char(1) NOT NULL default '',
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;  
 

@@ -52,10 +52,8 @@
     </tr>
     </tbody>
     </table>
-    <!-- Statistikdaten der einzelnen Bots Name -->
+    <!-- Gesamt-Statistikdaten -->
     <?php echo $this->BotSummary; ?>
-    
-    <!-- Statistikdaten der einzelnen Bots Datum -->
     
     <div class="clear"></div>
 </div>

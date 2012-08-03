@@ -158,35 +158,29 @@ class ModuleBotStatisticsTag extends Frontend
 	    //detail on/off ermmitteln
 	    //tl_botstatistics_counter.id ermitteln als pid
 	    $objBotModul = $this->Database->prepare("SELECT tl_botstatistics_counter.id AS pid
-                                        	            ,tl_module.botstatistics_details
-                        	            FROM tl_botstatistics_counter
-                        	            INNER JOIN tl_module ON tl_botstatistics_counter.bot_module_id=tl_module.id
-                        	            WHERE tl_botstatistics_counter.bot_module_id=?
-                        	            AND tl_botstatistics_counter.bot_name=?
-                        	            AND tl_botstatistics_counter.bot_date=?")
+                                	            FROM tl_botstatistics_counter
+                                	            WHERE tl_botstatistics_counter.bot_module_id=?
+                                	            AND tl_botstatistics_counter.bot_name=?
+                                	            AND tl_botstatistics_counter.bot_date=?")
                         	          ->executeUncached($bid, $this->BotName, $this->CURDATE);
 	    $objBotModul->next();
-	    if ($objBotModul->botstatistics_details)
-	    {
-    	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch kein Eintrag vorhanden ist
-    	    // durch Insert Ignore und Unique Key
-    	    $arrSet = array
-    	    (
-    	            'id'  => 0,
-    	            'pid' => $objBotModul->pid,
-    	            'bot_page_alias'         => $page_alias,
-    	            'bot_page_alias_counter' => 0
-    	    );
-    	    $this->Database->prepare("INSERT IGNORE INTO tl_botstatistics_counter_details %s")
-    	                   ->set($arrSet)->executeUncached();
-    	    
-    	    $this->Database->prepare("UPDATE tl_botstatistics_counter_details 
-                                      SET bot_page_alias_counter=bot_page_alias_counter+1
-                                      WHERE pid=? AND bot_page_alias=?")
-                           ->executeUncached($objBotModul->pid,$page_alias);
-    	    return true;
-    	}
-	    return false;
+	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch kein Eintrag vorhanden ist
+	    // durch Insert Ignore und Unique Key
+	    $arrSet = array
+	    (
+	            'id'  => 0,
+	            'pid' => $objBotModul->pid,
+	            'bot_page_alias'         => $page_alias,
+	            'bot_page_alias_counter' => 0
+	    );
+	    $this->Database->prepare("INSERT IGNORE INTO tl_botstatistics_counter_details %s")
+	                   ->set($arrSet)->executeUncached();
+	    
+	    $this->Database->prepare("UPDATE tl_botstatistics_counter_details 
+                                  SET bot_page_alias_counter=bot_page_alias_counter+1
+                                  WHERE pid=? AND bot_page_alias=?")
+                       ->executeUncached($objBotModul->pid,$page_alias);
+	    return true;
 	}
 	
 	/**
@@ -197,6 +191,7 @@ class ModuleBotStatisticsTag extends Frontend
 	    if (!in_array('botdetection', $this->Config->getActiveModules()))
 	    {
 	        //botdetection Modul fehlt, Abbruch, Meldung kommt bereits per Hook
+	        $this->BotName = false;
 	        return false;
 	    }
 	    $this->import('ModuleBotDetection');

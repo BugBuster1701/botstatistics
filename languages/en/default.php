@@ -30,7 +30,7 @@
 
 
 /**
- * Miscellaneous
+ * Backend Statistic
  */
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modname']       = 'Botstatistic Module';
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modulename']    = 'Module name';

@@ -17,13 +17,11 @@
 /**
  * Back end modules
  */
-//$GLOBALS['TL_LANG']['MOD'][''] = array('', '');
 $GLOBALS['TL_LANG']['MOD']['botstatistics'] = array('Bot Statistics', 'Count visits of Bots');
 
 /**
  * Front end modules
  */
-//$GLOBALS['TL_LANG']['FMD'][''] = array('', '');
 $GLOBALS['TL_LANG']['FMD']['botstatistics'] = array('Bot Statistics', 'Count visits of Bots');
 
 ?>
