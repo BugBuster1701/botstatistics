@@ -31,6 +31,16 @@ class BotStatisticsHelper extends BackendModule
 	 */
     protected static $instance = null;
     
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->import('BackendUser', 'User');
+        parent::__construct();
+    }
+    
+    
     protected function compile()
     {
         
