@@ -2,11 +2,12 @@
 <div id="tl_buttons" style="padding-bottom: 9px;">
     <a href="<?php echo $this->href; ?>" class="header_back" title="<?php echo $this->title; ?>"><?php echo $this->button; ?></a>
 </div>
+<p><?php echo $this->getMessages(false); ?></p>
 <form method="post" class="info" id="bot_statistic" action="<?php echo $this->bot_base_be; ?>/main.php?do=botstatistics">
     <div class="tl_panel" style="border-top: 1px solid #BBBBBB;">
         <div class="tl_filter tl_subpanel">
             <strong><?php echo $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modulename']; ?>:</strong>        
-            <select class="tl_select" id="tl_sort" name="bot_module_id" style="width: 200px; opacity: 0;">
+            <select class="tl_select" id="tl_sort" name="bot_module_id" style="width: 200px;">
 <?php foreach ($this->bot_modules as $bot_module): ?>
     <?php if ($bot_module['id']==$this->bot_module_id) : ?>
                 <option selected="selected" value="<?php echo $bot_module['id']; ?>"><?php echo $bot_module['title']; ?></option>

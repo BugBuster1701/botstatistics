@@ -49,6 +49,7 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 	    {
 	        $this->setZero();
 	    }
+	    $this->checkExtensions('','be_main'); //for statistics page directly, callback modules use not the template hook
 	}
 	
 	/**
