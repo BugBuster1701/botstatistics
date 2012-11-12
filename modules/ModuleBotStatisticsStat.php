@@ -1,4 +1,5 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
+
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
@@ -14,6 +15,10 @@
  * @license    LGPL
  */
 
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\BotStatistics;
 
 /**
  * Class ModuleBotStatisticsStat
@@ -22,7 +27,7 @@
  * @author     Glen Langer
  * @package    BotStatistics
  */
-class ModuleBotStatisticsStat extends BotStatisticsHelper
+class ModuleBotStatisticsStat extends \BugBuster\BotStatistics\BotStatisticsHelper
 {
     /**
 	 * Template
@@ -43,13 +48,13 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 	{
 	    parent::__construct();
 	    
-	    $this->intModuleID = (int)$this->Input->post('bot_module_id'); //Modul-ID
+	    $this->intModuleID = (int)\Input::post('bot_module_id'); //Modul-ID
 	    //act=zero&zid=...
-	    if ($this->Input->get('act',true)=='zero') 
+	    if (\Input::get('act',true)=='zero') 
 	    {
 	        $this->setZero();
 	    }
-	    $this->import('BotStatisticsCheck');
+	    $this->import('\BotStatistics\BotStatisticsCheck','BotStatisticsCheck');
 	    $this->BotStatisticsCheck->checkExtensions('','be_main'); //for statistics page directly, callback modules use not the template hook
 	}
 	
@@ -66,8 +71,8 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->theme  = $this->getTheme();
 		$this->Template->theme0 = 'default';
-		$this->Template->bot_base    = $this->Environment->base;
-		$this->Template->bot_base_be = $this->Environment->base . 'contao';
+		$this->Template->bot_base    = \Environment::get('base');
+		$this->Template->bot_base_be = \Environment::get('base') . 'contao';
 		
 		if ($this->intModuleID == 0) 
 		{   //direkter Aufruf ohne ID
@@ -127,9 +132,9 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 	 */
 	protected function setZero()
 	{
-	    if ( is_numeric($this->Input->get('zid')) && $this->Input->get('zid') > 0 ) 
+	    if ( is_numeric(\Input::get('zid')) && \Input::get('zid') > 0 ) 
 	    {
-	        $module_id = $this->Input->get('zid');
+	        $module_id = \Input::get('zid');
 	    }
 	    else 
 	    {
@@ -144,4 +149,3 @@ class ModuleBotStatisticsStat extends BotStatisticsHelper
 	}
 	
 }
-?>

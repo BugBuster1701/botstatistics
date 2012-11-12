@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
 
 /**
  * Contao Open Source CMS
@@ -31,17 +31,17 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['botstatistics']   = 'name,type;bots
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_name'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['botstatistics_name'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'search'                  => true,
-	'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
+	'label'         => &$GLOBALS['TL_LANG']['tl_module']['botstatistics_name'],
+	'exclude'       => true,
+	'inputType'     => 'text',
+	'search'        => true,
+	'eval'          => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_cron'] = array(
-        'label'		=> &$GLOBALS['TL_LANG']['tl_module']['botstatistics_cron'],
-        'inputType'	=> 'checkbox',
-        'eval'      => array('mandatory'=>false, 'tl_class'=>'w50 m12')
+$GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_cron'] = array
+(
+    'label'			=> &$GLOBALS['TL_LANG']['tl_module']['botstatistics_cron'],
+    'inputType'		=> 'checkbox',
+    'eval'      	=> array('mandatory'=>false, 'tl_class'=>'w50 m12')
 );
 
-?>

@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php 
 
 /**
  * Contao Open Source CMS
@@ -15,6 +15,10 @@
  * @license    LGPL 
  */
 
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\BotStatistics;
 
 /**
  * Class ModuleBotStatisticsTag 
@@ -23,7 +27,7 @@
  * @author     Glen Langer 
  * @package    BotStatistics
  */
-class ModuleBotStatisticsTag extends Frontend
+class ModuleBotStatisticsTag extends \Frontend
 {
 	protected $BotStatus = false;
 	protected $BotName   = '';
@@ -79,7 +83,7 @@ class ModuleBotStatisticsTag extends Frontend
 	protected function setBotCounter($bid)
 	{
 	    $visit = false;
-	    $ClientIP = bin2hex(sha1($bid . $this->Environment->remoteAddr,true)); // sha1 20 Zeichen, bin2hex 40 zeichen
+	    $ClientIP = bin2hex(sha1($bid . \Environment::get('remoteAddr'),true)); // sha1 20 Zeichen, bin2hex 40 zeichen
 	    $BlockTime = 60; //Sekunden
 	    $this->CURDATE = date('Y-m-d');
 	    
@@ -194,7 +198,7 @@ class ModuleBotStatisticsTag extends Frontend
 	        $this->BotName = false;
 	        return false;
 	    }
-	    $this->import('ModuleBotDetection');
+	    $this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
 	    if ($this->ModuleBotDetection->BD_CheckBotAgent() || $this->ModuleBotDetection->BD_CheckBotIP()) 
 	    {
 	        //log_message('BotStatus True','debug.log');
@@ -212,4 +216,3 @@ class ModuleBotStatisticsTag extends Frontend
 	
 }//class
 
-?>

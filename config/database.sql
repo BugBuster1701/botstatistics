@@ -50,7 +50,7 @@ CREATE TABLE `tl_botstatistics_counter_details` (
 CREATE TABLE `tl_botstatistics_blocker` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `bot_module_id` int(10) unsigned NOT NULL default '0',
-  `bot_tstamp` timestamp NULL default NULL,
+  `bot_tstamp` timestamp NULL,
   `bot_ip` varchar(40) NOT NULL default '0.0.0.0',
   PRIMARY KEY  (`id`),
   KEY `bot_module_id` (`bot_module_id`)

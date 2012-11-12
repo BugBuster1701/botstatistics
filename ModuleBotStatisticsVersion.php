@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
@@ -14,6 +14,6 @@
  * @license    LGPL 
  */
 
-define('BOTSTATISTICS_VERSION', '0.5');
-define('BOTSTATISTICS_BUILD'  , '2');
+define('BOTSTATISTICS_VERSION', '3.0');
+define('BOTSTATISTICS_BUILD'  , '0');
 

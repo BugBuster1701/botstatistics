@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php 
 
 /**
  * Contao Open Source CMS
@@ -15,6 +15,10 @@
  * @license    LGPL 
  */
 
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\BotStatistics;
 
 /**
  * Class BotStatisticsCron 
@@ -23,7 +27,7 @@
  * @author     Glen Langer 
  * @package    BotStatistics
  */
-class BotStatisticsCron extends Frontend
+class BotStatisticsCron extends \Frontend
 {
 	/**
 	 * Display a wildcard in the back end
@@ -51,4 +55,3 @@ class BotStatisticsCron extends Frontend
 	
 }//class
 
-?>

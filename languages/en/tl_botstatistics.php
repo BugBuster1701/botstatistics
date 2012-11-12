@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
 
 /**
  * Contao Open Source CMS
@@ -6,9 +6,7 @@
  *
  * Formerly known as TYPOlight Open Source CMS.
  * 
- * Module Botstatistics Language file
- * 
- * Language file (en)
+ * Modul BotStatistics 
  *
  * PHP version 5
  * @copyright  Glen Langer 2012 

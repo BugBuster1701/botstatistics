@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
 
 /**
  * Contao Open Source CMS
@@ -15,6 +15,10 @@
  * @license    LGPL
  */
 
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\BotStatistics;
 
 /**
  * Class BotStatisticsHelper
@@ -23,7 +27,7 @@
  * @author     Glen Langer
  * @package    BotStatistics
  */
-class BotStatisticsHelper extends BackendModule
+class BotStatisticsHelper extends \BackendModule
 {
     /**
 	 * Current object instance
@@ -115,7 +119,7 @@ class BotStatisticsHelper extends BackendModule
         $today     = date('Y-m-d');
         $yesterday = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
 
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_summary');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_summary');
         
         $this->TemplatePartial->AnzBotYesterday    = 0;
         $this->TemplatePartial->AnzVisitsYesterday = 0;
@@ -252,7 +256,7 @@ class BotStatisticsHelper extends BackendModule
     
     protected function getBotStatDetailsAnzBot($action,$bmid)
     {
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -273,7 +277,7 @@ class BotStatisticsHelper extends BackendModule
     
     protected function getBotStatDetailsAnzVisits($action,$bmid)
     {
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -294,7 +298,7 @@ class BotStatisticsHelper extends BackendModule
     }
     protected function getBotStatDetailsAnzPages($action,$bmid)
     {
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -325,7 +329,7 @@ class BotStatisticsHelper extends BackendModule
     protected function getBotStatDetailsAnzBotToday($action,$bmid)
     {
         $today = date('Y-m-d');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -348,7 +352,7 @@ class BotStatisticsHelper extends BackendModule
     protected function getBotStatDetailsAnzVisitsToday($action,$bmid)
     {
         $today = date('Y-m-d');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -371,7 +375,7 @@ class BotStatisticsHelper extends BackendModule
     protected function getBotStatDetailsAnzPagesToday($action,$bmid)
     {
         $today = date('Y-m-d');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -403,7 +407,7 @@ class BotStatisticsHelper extends BackendModule
     protected function getBotStatDetailsAnzBotYesterday($action,$bmid)
     {
         $yesterday = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -426,7 +430,7 @@ class BotStatisticsHelper extends BackendModule
     protected function getBotStatDetailsAnzVisitsYesterday($action,$bmid)
     {
         $yesterday = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -449,7 +453,7 @@ class BotStatisticsHelper extends BackendModule
     protected function getBotStatDetailsAnzPagesYesterday($action,$bmid)
     {
         $yesterday = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -481,7 +485,7 @@ class BotStatisticsHelper extends BackendModule
         $CurrentWeek = date('W');
         //Besonderheit beachten das der 1.1. die 53. Woche sein kann!
         $YearCurrentWeek = ($CurrentWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -506,7 +510,7 @@ class BotStatisticsHelper extends BackendModule
         $CurrentWeek = date('W');
         //Besonderheit beachten das der 1.1. die 53. Woche sein kann!
         $YearCurrentWeek = ($CurrentWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -531,7 +535,7 @@ class BotStatisticsHelper extends BackendModule
         $CurrentWeek = date('W');
         //Besonderheit beachten das der 1.1. die 53. Woche sein kann!
         $YearCurrentWeek = ($CurrentWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -564,7 +568,7 @@ class BotStatisticsHelper extends BackendModule
         $LastWeek = date('W', mktime(0, 0, 0, date("m"), date("d")-7, date("Y")) );
         //Besonderheit beachten das der 1.1. die 53. Woche sein kann!
         $YearLastWeek = ($LastWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -589,7 +593,7 @@ class BotStatisticsHelper extends BackendModule
         $LastWeek = date('W', mktime(0, 0, 0, date("m"), date("d")-7, date("Y")) );
         //Besonderheit beachten das der 1.1. die 53. Woche sein kann!
         $YearLastWeek = ($LastWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";
@@ -614,7 +618,7 @@ class BotStatisticsHelper extends BackendModule
         $LastWeek = date('W', mktime(0, 0, 0, date("m"), date("d")-7, date("Y")) );
         //Besonderheit beachten das der 1.1. die 53. Woche sein kann!
         $YearLastWeek = ($LastWeek > 40 && (int)date('m') == 1) ? date('Y')-1 : date('Y');
-        $this->TemplatePartial = new BackendTemplate('mod_botstatistics_be_stat_partial_details');
+        $this->TemplatePartial = new \BackendTemplate('mod_botstatistics_be_stat_partial_details');
         $this->TemplatePartial->action = $action;
         $this->TemplatePartial->bmid = $bmid;
         $this->TemplatePartial->BotDetailList  = '<div class="tl_listing_container list_view">'."\n";

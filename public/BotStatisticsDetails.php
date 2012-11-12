@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
@@ -15,10 +16,15 @@
  */
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\BotStatistics;
+
+/**
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require('../../initialize.php');
+require('../../../initialize.php');
 
 /**
  * Class BotStatisticsDetails
@@ -27,7 +33,7 @@ require('../../initialize.php');
  * @author     Glen Langer
  * @package    BotStatistics
  */
-class BotStatisticsDetails extends BotStatisticsHelper 
+class BotStatisticsDetails extends \BotStatistics\BotStatisticsHelper 
 {
    
     /**
@@ -44,14 +50,14 @@ class BotStatisticsDetails extends BotStatisticsHelper
 	
     public function run()
 	{
-   	    if ( is_null( $this->Input->get('action',true) ) || 
-   	         is_null( $this->Input->get('bmid',true) ) )
+   	    if ( is_null( \Input::get('action',true) ) || 
+   	         is_null( \Input::get('bmid',true) ) )
    	    {
    	        echo '<html><body><p class="tl_error">'.$GLOBALS['TL_LANG']['tl_botstatistics']['wrong_parameter'].'</p></body></html>';
             return ;
 	    }
 	    
-	    switch ($this->Input->get('action',true))
+	    switch (\Input::get('action',true))
 	    {
 	        case 'AnzBot' :
 	        case 'AnzVisits' :
@@ -68,8 +74,8 @@ class BotStatisticsDetails extends BotStatisticsHelper
 	        case 'AnzBotLastWeek' :
 	        case 'AnzVisitsLastWeek' :
 	        case 'AnzPagesLastWeek' :
-	            $DetailFunction = 'getBotStatDetails'.$this->Input->get('action',true);
-	            echo $this->$DetailFunction( $this->Input->get('action',true), $this->Input->get('bmid',true) );
+	            $DetailFunction = 'getBotStatDetails'.\Input::get('action',true);
+	            echo $this->$DetailFunction( \Input::get('action',true), \Input::get('bmid',true) );
 	            break;
 	        default:
 	            echo '<html><body><p class="tl_error">'.$GLOBALS['TL_LANG']['tl_botstatistics']['wrong_parameter'].'</p></body></html>';
@@ -85,4 +91,3 @@ class BotStatisticsDetails extends BotStatisticsHelper
 $objBotStatisticsDetails = new BotStatisticsDetails();
 $objBotStatisticsDetails->run();
 
-?>

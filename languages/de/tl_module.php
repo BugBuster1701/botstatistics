@@ -1,13 +1,12 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
+
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  * 
- * Modul BotStatistics Sprachdateien
- * 
- * Language file for table tl_module (de).
+ * Modul BotStatistics 
  *
  * PHP version 5
  * @copyright  Glen Langer 2012

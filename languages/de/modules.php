@@ -1,9 +1,12 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php 
 
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
  *
+ * Formerly known as TYPOlight Open Source CMS.
+ * 
+ * Modul BotStatistics 
  *
  * PHP version 5
  * @copyright  Glen Langer 2012 
@@ -24,4 +27,3 @@ $GLOBALS['TL_LANG']['MOD']['botstatistics'] = array('Botstatistik', 'Z&auml;hlt 
  */
 $GLOBALS['TL_LANG']['FMD']['botstatistics'] = array('Botstatistik', 'Z&auml;hlt Besuche von Bots');
 
-?>

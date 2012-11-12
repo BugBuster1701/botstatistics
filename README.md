@@ -11,5 +11,6 @@ Contao Bot Statistics (Still in development.)
 
 **uat** This is the current release candidate branch. (see tags with "rc" in name)
 
+**c3version** First try in Contao 3
 
 This software using the Fugue Icons from http://p.yusukekamiyamane.com/icons/search/fugue/

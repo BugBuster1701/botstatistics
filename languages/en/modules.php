@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php 
 
 /**
  * Contao Open Source CMS
@@ -24,4 +24,3 @@ $GLOBALS['TL_LANG']['MOD']['botstatistics'] = array('Bot Statistics', 'Count vis
  */
 $GLOBALS['TL_LANG']['FMD']['botstatistics'] = array('Bot Statistics', 'Count visits of Bots');
 
-?>

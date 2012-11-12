@@ -1,5 +1,5 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
-
+<?php
+ 
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
@@ -15,6 +15,10 @@
  * @license    LGPL 
  */
 
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\BotStatistics;
 
 /**
  * Class ModuleBotStatistics 
@@ -23,7 +27,7 @@
  * @author     Glen Langer 
  * @package    BotStatistics
  */
-class ModuleBotStatistics extends Module
+class ModuleBotStatistics extends \Module
 {
 
 	/**
@@ -40,7 +44,7 @@ class ModuleBotStatistics extends Module
 	{
 	    if (TL_MODE == 'BE')
 	    {
-	        $objTemplate = new BackendTemplate('be_wildcard');
+	        $objTemplate = new \BackendTemplate('be_wildcard');
 	        $objTemplate->wildcard = '### BotStatistics Counter ###';
 	        $objTemplate->title = $this->headline;
 	        $objTemplate->id = $this->id;
@@ -68,4 +72,3 @@ class ModuleBotStatistics extends Module
 	
 }//class
 
-?>
