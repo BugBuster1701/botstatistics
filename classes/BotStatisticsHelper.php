@@ -1,18 +1,17 @@
 <?php 
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2012 Leo Feyer
  *
- * Formerly known as TYPOlight Open Source CMS.
+ * Module BotStatistics Stat
+ * Helper class 
  * 
- * Modul BotStatistics Stat - Helper 
- * 
- * PHP version 5
- * @copyright  Glen Langer 2012
- * @author     Glen Langer
+ * @copyright  Glen Langer 2012 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  * @license    LGPL
+ * @filesource
+ * @see        https://github.com/BugBuster1701/botstatistics
  */
 
 /**
@@ -23,8 +22,8 @@ namespace BugBuster\BotStatistics;
 /**
  * Class BotStatisticsHelper
  *
- * @copyright  Glen Langer 2012
- * @author     Glen Langer
+ * @copyright  Glen Langer 2012 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  */
 class BotStatisticsHelper extends \BackendModule
