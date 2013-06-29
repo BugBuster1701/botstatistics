@@ -32,6 +32,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_name'] = array
 	'exclude'       => true,
 	'inputType'     => 'text',
 	'search'        => true,
+    'sql'           => "varchar(64) NOT NULL default ''",
 	'eval'          => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
 );
 
@@ -39,6 +40,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_cron'] = array
 (
     'label'			=> &$GLOBALS['TL_LANG']['tl_module']['botstatistics_cron'],
     'inputType'		=> 'checkbox',
+    'sql'           => "char(1) NOT NULL default ''",
     'eval'      	=> array('mandatory'=>false, 'tl_class'=>'w50 m12')
 );
 
