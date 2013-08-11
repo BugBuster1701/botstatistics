@@ -1,12 +1,12 @@
 <?php 
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  *
  * Module BotStatistics 
  * Language file
  * 
- * @copyright  Glen Langer 2012 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
  * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  * @license    LGPL
@@ -14,11 +14,6 @@
  * @see        https://github.com/BugBuster1701/botstatistics
  */
 
-
-/**
- * Miscellaneous
- */
-//$GLOBALS['TL_LANG']['MSC'][''] = '';
 
 /**
  * Backend Statistik
@@ -44,4 +39,10 @@ $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['last_week']     = 'letzte W
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_bots']   = 'Anzahl unterschiedlicher Bots';
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_visit']  = 'Anzahl Besuche (Scans)';
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_hit']    = 'Anzahl Zugriffe (Seiten)';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['bot_name']      = 'Bot Name';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['last_visit']    = 'Letzter Besuch';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['bots_top20']    = 'Bot Besuche TOP 20';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['pages_top20']   = "Seiten Zugriffe durch Bots TOP 20";
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['page_alias']    = "Seitenalias";
+
 

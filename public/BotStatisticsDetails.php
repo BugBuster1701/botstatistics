@@ -32,7 +32,7 @@ require('../../../initialize.php');
  * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  */
-class BotStatisticsDetails extends \BotStatistics\BotStatisticsHelper 
+class BotStatisticsDetails extends \BugBuster\BotStatistics\BotStatisticsHelper 
 {
    
     /**

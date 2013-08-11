@@ -100,17 +100,27 @@ class ModuleBotStatisticsTag extends \Frontend
 	    }
 	    
 	    //Bot Blocker
-	    $this->Database->prepare("DELETE FROM tl_botstatistics_blocker"
-                	            ." WHERE CURRENT_TIMESTAMP - INTERVAL ? SECOND > bot_tstamp"
-                	            ." AND bot_module_id=?")
-                       ->executeUncached($BlockTime, $bid);
+	    \Database::getInstance()
+	        ->prepare("DELETE FROM 
+	                        tl_botstatistics_blocker
+        	            WHERE 
+	                        CURRENT_TIMESTAMP - INTERVAL ? SECOND > bot_tstamp
+                	    AND 
+	                        bot_module_id = ?
+	                ")
+            ->executeUncached($BlockTime, $bid);
 	    
 	    //Test ob Bot Visits gesetzt werden muessen
-	    $objBotIP = $this->Database->prepare("SELECT id"
-                            	            ." FROM tl_botstatistics_blocker"
-                            	            ." WHERE bot_module_id=? AND bot_ip=?")
-                            	   ->limit(1)
-	                               ->executeUncached($bid, $ClientIP);
+	    $objBotIP = \Database::getInstance()
+	                    ->prepare("SELECT 
+	                                    id
+                    	            FROM 
+	                                    tl_botstatistics_blocker
+                    	            WHERE 
+	                                    bot_module_id = ? AND bot_ip = ?
+	                            ")
+                        ->limit(1)
+                        ->executeUncached($bid, $ClientIP);
 	    
 	    if ($objBotIP->numRows == 0) 
 	    {
@@ -125,23 +135,46 @@ class ModuleBotStatisticsTag extends \Frontend
     	            'bot_name'     => $this->BotName,
     	            'bot_counter'  => 0
     	    );
-    	    $this->Database->prepare("INSERT IGNORE INTO tl_botstatistics_counter %s")->set($arrSet)->executeUncached();
+    	    \Database::getInstance()
+    	        ->prepare("INSERT IGNORE INTO tl_botstatistics_counter %s")
+    	        ->set($arrSet)
+    	        ->executeUncached();
     	    
     	    //Bot Visits lesen
-    	    $objBotCounter = $this->Database->prepare("SELECT id, bot_counter"
-                                    	            ." FROM tl_botstatistics_counter"
-                                    	            ." WHERE bot_module_id=?"
-                    	                            ." AND bot_date=?"
-                                    	            ." AND bot_name=?")
-    	                          ->executeUncached($bid, $this->CURDATE, $this->BotName);
+    	    $objBotCounter = \Database::getInstance()
+    	                        ->prepare("SELECT 
+    	                                        id, bot_counter
+                            	            FROM 
+    	                                        tl_botstatistics_counter
+                            	            WHERE 
+    	                                        bot_module_id = ?
+            	                            AND 
+    	                                        bot_date = ?
+                            	            AND 
+    	                                        bot_name = ?
+    	                                ")
+                                ->executeUncached($bid, $this->CURDATE, $this->BotName);
     	    $objBotCounter->next();
     	    //zählen per update
-    	    $this->Database->prepare("UPDATE tl_botstatistics_counter SET bot_counter=? WHERE id=?")
-    	                   ->executeUncached($objBotCounter->bot_counter +1, $objBotCounter->id);
+    	    \Database::getInstance()
+    	        ->prepare("UPDATE 
+    	                        tl_botstatistics_counter 
+    	                    SET 
+    	                        bot_counter = ? 
+    	                    WHERE 
+    	                        id = ?
+    	                ")
+                ->executeUncached($objBotCounter->bot_counter +1, $objBotCounter->id);
     	    //blocken
-    	    $this->Database->prepare("INSERT INTO tl_botstatistics_blocker"
-    	                            ." SET bot_module_id=?, bot_tstamp=CURRENT_TIMESTAMP, bot_ip=?")
-    	                   ->executeUncached($bid, $ClientIP);
+    	    \Database::getInstance()
+    	        ->prepare("INSERT INTO 
+    	                        tl_botstatistics_blocker 
+    	                    SET 
+    	                        bot_module_id = ?, 
+    	                        bot_tstamp = CURRENT_TIMESTAMP, 
+    	                        bot_ip = ?
+    	                ")
+                ->executeUncached($bid, $ClientIP);
     	    $visit = true;
         }
 	    return $visit;
@@ -160,12 +193,19 @@ class ModuleBotStatisticsTag extends \Frontend
 	    //Detail Zählung
 	    //detail on/off ermmitteln
 	    //tl_botstatistics_counter.id ermitteln als pid
-	    $objBotModul = $this->Database->prepare("SELECT tl_botstatistics_counter.id AS pid
-                                	            FROM tl_botstatistics_counter
-                                	            WHERE tl_botstatistics_counter.bot_module_id=?
-                                	            AND tl_botstatistics_counter.bot_name=?
-                                	            AND tl_botstatistics_counter.bot_date=?")
-                        	          ->executeUncached($bid, $this->BotName, $this->CURDATE);
+	    $objBotModul = \Database::getInstance()
+	                        ->prepare("SELECT 
+	                                        tl_botstatistics_counter.id AS pid
+                        	            FROM 
+	                                        tl_botstatistics_counter
+                        	            WHERE 
+	                                        tl_botstatistics_counter.bot_module_id = ?
+                        	            AND 
+	                                        tl_botstatistics_counter.bot_name = ?
+                        	            AND 
+	                                        tl_botstatistics_counter.bot_date = ?
+	                                ")
+                            ->executeUncached($bid, $this->BotName, $this->CURDATE);
 	    $objBotModul->next();
 	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch kein Eintrag vorhanden ist
 	    // durch Insert Ignore und Unique Key
@@ -176,13 +216,22 @@ class ModuleBotStatisticsTag extends \Frontend
 	            'bot_page_alias'         => $page_alias,
 	            'bot_page_alias_counter' => 0
 	    );
-	    $this->Database->prepare("INSERT IGNORE INTO tl_botstatistics_counter_details %s")
-	                   ->set($arrSet)->executeUncached();
+	    \Database::getInstance()
+	        ->prepare("INSERT IGNORE INTO tl_botstatistics_counter_details %s")
+            ->set($arrSet)
+	        ->executeUncached();
 	    
-	    $this->Database->prepare("UPDATE tl_botstatistics_counter_details 
-                                  SET bot_page_alias_counter=bot_page_alias_counter+1
-                                  WHERE pid=? AND bot_page_alias=?")
-                       ->executeUncached($objBotModul->pid,$page_alias);
+	    \Database::getInstance()
+	        ->prepare("UPDATE 
+	                        tl_botstatistics_counter_details 
+                        SET 
+	                        bot_page_alias_counter = bot_page_alias_counter+1
+                        WHERE 
+	                        pid=? 
+	                    AND 
+	                        bot_page_alias = ?
+	                ")
+            ->executeUncached($objBotModul->pid,$page_alias);
 	    return true;
 	}
 	

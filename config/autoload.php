@@ -45,8 +45,10 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_botstatistics_be_stat'                 => 'system/modules/botstatistics/templates',
-	'mod_botstatistics_be_stat_partial_details' => 'system/modules/botstatistics/templates',
-	'mod_botstatistics_be_stat_partial_summary' => 'system/modules/botstatistics/templates',
-	'mod_botstatistics_fe'                      => 'system/modules/botstatistics/templates',
+	'mod_botstatistics_be_stat_partial_summary'   => 'system/modules/botstatistics/templates',
+	'mod_botstatistics_be_stat_partial_details'   => 'system/modules/botstatistics/templates',
+	'mod_botstatistics_fe'                        => 'system/modules/botstatistics/templates',
+	'mod_botstatistics_be_stat_partial_top_bots'  => 'system/modules/botstatistics/templates',
+	'mod_botstatistics_be_stat_partial_top_pages' => 'system/modules/botstatistics/templates',
+	'mod_botstatistics_be_stat'                   => 'system/modules/botstatistics/templates',
 ));

@@ -75,7 +75,15 @@ class ModuleBotStatisticsStat extends \BugBuster\BotStatistics\BotStatisticsHelp
 		
 		if ($this->intModuleID == 0) 
 		{   //direkter Aufruf ohne ID
-		    $objBotModuleID = $this->Database->prepare("SELECT MIN(id) AS MID from tl_module WHERE `type`='botstatistics'")->execute();
+		    $objBotModuleID = \Database::getInstance()
+		                            ->prepare("SELECT 
+		                                            MIN(id) AS MID 
+		                                        FROM 
+		                                            tl_module 
+		                                        WHERE 
+		                                            `type`='botstatistics'
+		                                    ")
+                                    ->execute();
 		    $objBotModuleID->next();
 		    if ($objBotModuleID->MID !== null) 
 		    {
@@ -88,11 +96,17 @@ class ModuleBotStatisticsStat extends \BugBuster\BotStatistics\BotStatisticsHelp
 		$this->Template->botstatistics_version = $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['modname'] . ' ' . BOTSTATISTICS_VERSION .'.'. BOTSTATISTICS_BUILD;
 
 		//Modul Namen holen
-		$objBotModules = $this->Database->prepare("SELECT `id`, `botstatistics_name`"
-                                        		. " FROM `tl_module`"
-                                        		. " WHERE `type`='botstatistics'"
-	                                            . " ORDER BY `botstatistics_name`")
-                                        ->execute();
+		$objBotModules = \Database::getInstance()
+		                        ->prepare("SELECT 
+		                                        `id`, 
+		                                        `botstatistics_name`
+                                            FROM 
+		                                        `tl_module`
+                                            WHERE 
+		                                        `type`='botstatistics'
+                                            ORDER BY `botstatistics_name`
+		                                ")
+                                ->execute();
 		$intBotModules = $objBotModules->numRows;
 		if ($intBotModules > 0)
 		{
@@ -121,10 +135,13 @@ class ModuleBotStatisticsStat extends \BugBuster\BotStatistics\BotStatisticsHelp
 	    //Modul Werte holen
 	    if ($intBotModules > 0)
 	    {
-	        $this->Template->BotSummary = $this->getBotStatSummary();
+	        $this->Template->BotSummary  = $this->getBotStatSummary();
+	        $this->Template->BotTopBots  = $this->getTopBots();
+	        $this->Template->BotTopPages = $this->getTopPages();
 	    }
 
 	} // compile
+	
 	
 	/**
 	 * Statistic, set on zero
@@ -139,11 +156,19 @@ class ModuleBotStatisticsStat extends \BugBuster\BotStatistics\BotStatisticsHelp
 	    {
 	        return ; // wrong zid
 	    }
-	    $objStatDelete = $this->Database->prepare("DELETE FROM `tl_botstatistics_counter`, `tl_botstatistics_counter_details` 
-                                                    USING `tl_botstatistics_counter`, `tl_botstatistics_counter_details` 
-                                                    WHERE `tl_botstatistics_counter`.`id` = `tl_botstatistics_counter_details`.`pid`
-                                                    AND `tl_botstatistics_counter`.`bot_module_id`=?")
-                                        ->execute($module_id);
+	    \Database::getInstance()
+            ->prepare("DELETE FROM 
+                            `tl_botstatistics_counter`, 
+                            `tl_botstatistics_counter_details` 
+                        USING 
+                            `tl_botstatistics_counter`, 
+                            `tl_botstatistics_counter_details` 
+                        WHERE 
+                            `tl_botstatistics_counter`.`id` = `tl_botstatistics_counter_details`.`pid`
+                        AND 
+                            `tl_botstatistics_counter`.`bot_module_id` = ?
+                    ")
+            ->execute($module_id);
 	    return ;
 	}
 	
