@@ -38,3 +38,17 @@
   width:300px;
   float: left;
 }
+
+#mod_botstatistics_grey {
+	-moz-opacity:0.3;
+	opacity: 0.3;
+    filter: alpha(opacity=30); /* For IE8 and earlier */
+}
+
+.top_bots {
+	margin-top: 20px;
+}
+
+.top_pages {
+	margin-top: 20px;
+}

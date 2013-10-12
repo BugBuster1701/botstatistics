@@ -1,20 +1,17 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  *
- * Formerly known as TYPOlight Open Source CMS.
- * 
- * Modul BotStatistics - Backend DCA tl_module
+ * Modul BotStatistics - Backend 
+ * DCA tl_module, modifies the data container array of table tl_module.
  *
- * This file modifies the data container array of table tl_module.
- *
- * PHP version 5
- * @copyright  Glen Langer 2009..2012
- * @author     Glen Langer
+ * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  * @license    LGPL
+ * @filesource
+ * @see        https://github.com/BugBuster1701/botstatistics
  */
 
 
@@ -31,17 +28,19 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['botstatistics']   = 'name,type;bots
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_name'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['botstatistics_name'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'search'                  => true,
-	'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
+	'label'         => &$GLOBALS['TL_LANG']['tl_module']['botstatistics_name'],
+	'exclude'       => true,
+	'inputType'     => 'text',
+	'search'        => true,
+    'sql'           => "varchar(64) NOT NULL default ''",
+	'eval'          => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_cron'] = array(
-        'label'		=> &$GLOBALS['TL_LANG']['tl_module']['botstatistics_cron'],
-        'inputType'	=> 'checkbox',
-        'eval'      => array('mandatory'=>false, 'tl_class'=>'w50 m12')
+$GLOBALS['TL_DCA']['tl_module']['fields']['botstatistics_cron'] = array
+(
+    'label'			=> &$GLOBALS['TL_LANG']['tl_module']['botstatistics_cron'],
+    'inputType'		=> 'checkbox',
+    'sql'           => "char(1) NOT NULL default ''",
+    'eval'      	=> array('mandatory'=>false, 'tl_class'=>'w50 m12')
 );
 
-?>

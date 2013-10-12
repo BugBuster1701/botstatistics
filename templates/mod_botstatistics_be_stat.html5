@@ -55,7 +55,12 @@
     </table>
     <!-- Gesamt-Statistikdaten -->
     <?php echo $this->BotSummary; ?>
+    <div class="clear"></div>
     
+    <?php echo $this->BotTopBots; ?>
+    <div class="clear"></div>
+    
+    <?php echo $this->BotTopPages; ?>
     <div class="clear"></div>
 </div>
 <?php endif; ?>

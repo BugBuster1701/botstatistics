@@ -1,33 +1,38 @@
 <?php
+
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  *
- * Formerly known as TYPOlight Open Source CMS.
- * 
- * Modul BotStatistics Stat - Backend
- * 
- * PHP version 5
- * @copyright  Glen Langer 2012
- * @author     Glen Langer
+ * Module BotStatistics Stat - Backend
+ * Botstatistic details
+ *  
+ * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  * @license    LGPL
+ * @filesource
+ * @see        https://github.com/BugBuster1701/botstatistics
  */
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\BotStatistics;
 
 /**
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require('../../initialize.php');
+require('../../../initialize.php');
 
 /**
  * Class BotStatisticsDetails
  *
- * @copyright  Glen Langer 2012
- * @author     Glen Langer
+ * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  */
-class BotStatisticsDetails extends BotStatisticsHelper 
+class BotStatisticsDetails extends \BugBuster\BotStatistics\BotStatisticsHelper 
 {
    
     /**
@@ -44,14 +49,14 @@ class BotStatisticsDetails extends BotStatisticsHelper
 	
     public function run()
 	{
-   	    if ( is_null( $this->Input->get('action',true) ) || 
-   	         is_null( $this->Input->get('bmid',true) ) )
+   	    if ( is_null( \Input::get('action',true) ) || 
+   	         is_null( \Input::get('bmid',true) ) )
    	    {
    	        echo '<html><body><p class="tl_error">'.$GLOBALS['TL_LANG']['tl_botstatistics']['wrong_parameter'].'</p></body></html>';
             return ;
 	    }
 	    
-	    switch ($this->Input->get('action',true))
+	    switch (\Input::get('action',true))
 	    {
 	        case 'AnzBot' :
 	        case 'AnzVisits' :
@@ -68,8 +73,8 @@ class BotStatisticsDetails extends BotStatisticsHelper
 	        case 'AnzBotLastWeek' :
 	        case 'AnzVisitsLastWeek' :
 	        case 'AnzPagesLastWeek' :
-	            $DetailFunction = 'getBotStatDetails'.$this->Input->get('action',true);
-	            echo $this->$DetailFunction( $this->Input->get('action',true), $this->Input->get('bmid',true) );
+	            $DetailFunction = 'getBotStatDetails'.\Input::get('action',true);
+	            echo $this->$DetailFunction( \Input::get('action',true), \Input::get('bmid',true) );
 	            break;
 	        default:
 	            echo '<html><body><p class="tl_error">'.$GLOBALS['TL_LANG']['tl_botstatistics']['wrong_parameter'].'</p></body></html>';
@@ -85,4 +90,3 @@ class BotStatisticsDetails extends BotStatisticsHelper
 $objBotStatisticsDetails = new BotStatisticsDetails();
 $objBotStatisticsDetails->run();
 
-?>

@@ -1,29 +1,32 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
-
+<?php
+ 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * Module BotStatistics - FE
- *
- * PHP version 5
- * @copyright  Glen Langer 2012 
- * @author     Glen Langer 
- * @package    BotStatistics 
- * @license    LGPL 
+ * Module BotStatistics - Frontend
+ * Insert counting tag in the page.
+ * 
+ * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
+ * @package    BotStatistics
+ * @license    LGPL
+ * @filesource
+ * @see        https://github.com/BugBuster1701/botstatistics
  */
 
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\BotStatistics;
 
 /**
  * Class ModuleBotStatistics 
  *
- * @copyright  Glen Langer 2012 
- * @author     Glen Langer 
+ * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  */
-class ModuleBotStatistics extends Module
+class ModuleBotStatistics extends \Module
 {
 
 	/**
@@ -40,7 +43,7 @@ class ModuleBotStatistics extends Module
 	{
 	    if (TL_MODE == 'BE')
 	    {
-	        $objTemplate = new BackendTemplate('be_wildcard');
+	        $objTemplate = new \BackendTemplate('be_wildcard');
 	        $objTemplate->wildcard = '### BotStatistics Counter ###';
 	        $objTemplate->title = $this->headline;
 	        $objTemplate->id = $this->id;
@@ -68,4 +71,3 @@ class ModuleBotStatistics extends Module
 	
 }//class
 
-?>

@@ -1,16 +1,17 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php 
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2012 Leo Feyer
  *
- *
- * PHP version 5
- * @copyright  Glen Langer 2012 
- * @author     Glen Langer 
- * @package    BotStatistics 
- * @license    LGPL 
+ * Module BotStatistics 
+ * Language file
+ * 
+ * @copyright  Glen Langer 2012 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
+ * @package    BotStatistics
+ * @license    LGPL
  * @filesource
+ * @see        https://github.com/BugBuster1701/botstatistics
  */
 
 
@@ -24,4 +25,3 @@ $GLOBALS['TL_LANG']['MOD']['botstatistics'] = array('Bot Statistics', 'Count vis
  */
 $GLOBALS['TL_LANG']['FMD']['botstatistics'] = array('Bot Statistics', 'Count visits of Bots');
 
-?>

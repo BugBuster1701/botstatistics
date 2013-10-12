@@ -1,31 +1,17 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php 
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
+ * Module BotStatistics 
+ * Language file
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Glen Langer 2012 
- * @author     Glen Langer 
- * @package    Language
- * @license    LGPL 
+ * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
+ * @package    BotStatistics
+ * @license    LGPL
  * @filesource
+ * @see        https://github.com/BugBuster1701/botstatistics
  */
 
 
@@ -53,4 +39,8 @@ $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['last_week']     = 'Last wee
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_bots']   = 'Number of different bots';
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_visit']  = 'Number of visits (Scans)';
 $GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['number_hit']    = 'Number of hits (Pages)';
-
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['bot_name']      = 'Name of bot';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['last_visit']    = 'Last visits';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['bots_top20']    = 'Bot visits TOP 20';
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['pages_top20']   = "Bot page hits TOP 20";
+$GLOBALS['TL_LANG']['MSC']['tl_botstatistics_stat']['page_alias']    = "Page alias";
