@@ -1,7 +1,7 @@
 {
 	"name":"bugbuster/botstatistics",
 	"description":"Counts the number of bot requests (visits, pages). ",
-	"keywords":["statistic","counter"],
+	"keywords":["contao","statistic","counter"],
 	"type":"contao-module",
 	"homepage":"http://www.contao.glen-langer.de",
 	"license":"LGPL-3.0+",

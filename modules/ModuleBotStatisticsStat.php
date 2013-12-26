@@ -53,8 +53,8 @@ class ModuleBotStatisticsStat extends \BugBuster\BotStatistics\BotStatisticsHelp
 	    {
 	        $this->setZero();
 	    }
-	    $this->import('\BotStatistics\BotStatisticsCheck','BotStatisticsCheck');
-	    $this->BotStatisticsCheck->checkExtensions('','be_main'); //for statistics page directly, callback modules use not the template hook
+	    //for statistics page directly, callback modules use not the template hook
+	    \BotStatistics\BotStatisticsCheck::getInstance()->checkExtensions('','be_main');
 	}
 	
 	/**

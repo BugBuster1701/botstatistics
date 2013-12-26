@@ -55,7 +55,7 @@ class ModuleBotStatisticsTag extends \Frontend
         }
 	    if ($arrTag[2] == 'count')
 	    {
-	        $this->import('Database');
+	        //$this->import('Database');
 	        $statusVisit  = $this->setBotCounter( (int)$arrTag[1] ); // Modul ID
 	        $statusDetail = $this->setBotCounterDetails( (int)$arrTag[1], $arrTag[3] ); // Modul ID, Page Alias
 	        
@@ -246,7 +246,8 @@ class ModuleBotStatisticsTag extends \Frontend
 	        $this->BotName = false;
 	        return false;
 	    }
-	    $this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
+	    //$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
+	    $this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
 	    if ($this->ModuleBotDetection->BD_CheckBotAgent() || $this->ModuleBotDetection->BD_CheckBotIP()) 
 	    {
 	        //log_message('BotStatus True','debug.log');
