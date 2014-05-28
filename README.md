@@ -1,7 +1,6 @@
-BotStatistics
-=============
-
 Contao Bot Statistics
+=====================
+[![Latest Stable Version](https://poser.pugx.org/bugbuster/botstatistics/v/stable.svg)](https://packagist.org/packages/bugbuster/botstatistics) [![Total Downloads](https://poser.pugx.org/bugbuster/botstatistics/downloads.svg)](https://packagist.org/packages/bugbuster/botstatistics) [![Latest Unstable Version](https://poser.pugx.org/bugbuster/botstatistics/v/unstable.svg)](https://packagist.org/packages/bugbuster/botstatistics) [![License](https://poser.pugx.org/bugbuster/botstatistics/license.svg)](https://packagist.org/packages/bugbuster/botstatistics)
 
 ## Branches
 
