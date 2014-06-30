@@ -1,27 +1,19 @@
-<?php 
-
+<?php
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2012 Leo Feyer
+ * Translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
  *
- * Module BotStatistics 
- * Language file
- * 
- * @copyright  Glen Langer 2012 <http://www.contao.glen-langer.de>
- * @author     Glen Langer (BugBuster)
- * @package    BotStatistics
- * @license    LGPL
- * @filesource
- * @see        https://github.com/BugBuster1701/botstatistics
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao-botstatistics/language/en/
+ *
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ *
+ * last-updated: 2013-12-09T00:30:11+01:00
  */
 
 
-/**
- * Back end modules
- */
-$GLOBALS['TL_LANG']['MOD']['botstatistics'] = array('Bot Statistics', 'Count visits of Bots');
-
-/**
- * Front end modules
- */
-$GLOBALS['TL_LANG']['FMD']['botstatistics'] = array('Bot Statistics', 'Count visits of Bots');
+$GLOBALS['TL_LANG']['FMD']['botstatistics']['0'] = 'Bot Statistics';
+$GLOBALS['TL_LANG']['FMD']['botstatistics']['1'] = 'Count visits of Bots';
+$GLOBALS['TL_LANG']['MOD']['botstatistics']['0'] = 'Bot Statistics';
+$GLOBALS['TL_LANG']['MOD']['botstatistics']['1'] = 'Count visits of Bots';
 
