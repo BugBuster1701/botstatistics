@@ -15,5 +15,5 @@
  */
 
 define('BOTSTATISTICS_VERSION', '3.1');
-define('BOTSTATISTICS_BUILD'  , '3');
+define('BOTSTATISTICS_BUILD'  , '4');
 

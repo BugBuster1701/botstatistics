@@ -18,10 +18,10 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['botstatistics'] = array('Botstatistik', 'Z&auml;hlt Besuche von Bots');
+$GLOBALS['TL_LANG']['MOD']['botstatistics'] = array('Botstatistik', 'Zählt Besuche von Bots');
 
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['botstatistics'] = array('Botstatistik', 'Z&auml;hlt Besuche von Bots');
+$GLOBALS['TL_LANG']['FMD']['botstatistics'] = array('Botstatistik', 'Zählt Besuche von Bots');
 

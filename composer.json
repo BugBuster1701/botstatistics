@@ -34,6 +34,12 @@
 			"sources":{
 				"":"system/modules/botstatistics"
 			},
+			"transifex": {
+				"project": "contao-botstatistics",
+				"prefix": "master-",
+				"languages_cto": "languages",
+				"languages_tx": ".tx"
+			},
 			"runonce":[
 				"runonce/runonce.php"
 			]
