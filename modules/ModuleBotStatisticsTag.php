@@ -55,7 +55,6 @@ class ModuleBotStatisticsTag extends \Frontend
         }
 	    if ($arrTag[2] == 'count')
 	    {
-	        //$this->import('Database');
 	        $statusVisit  = $this->setBotCounter( (int)$arrTag[1] ); // Modul ID
 	        $statusDetail = $this->setBotCounterDetails( (int)$arrTag[1], $arrTag[3] ); // Modul ID, Page Alias
 	        
@@ -126,8 +125,8 @@ class ModuleBotStatisticsTag extends \Frontend
 	    {
 	        // nicht geblockt Visit zählen
 	        
-    	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch kein Eintrag vorhanden ist
-    	    // durch Insert Ignore und Unique Key
+    	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch 
+    	    // kein Eintrag vorhanden ist durch Insert Ignore und Unique Key
     	    $arrSet = array
     	    (
     	            'bot_module_id'=> $bid,
@@ -207,8 +206,8 @@ class ModuleBotStatisticsTag extends \Frontend
 	                                ")
                             ->executeUncached($bid, $this->BotName, $this->CURDATE);
 	    $objBotModul->next();
-	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen wenn noch kein Eintrag vorhanden ist
-	    // durch Insert Ignore und Unique Key
+	    // Doppelte Einträge verhindern bei zeitgleichen Zugriffen 
+	    // wenn noch kein Eintrag vorhanden ist durch Insert Ignore und Unique Key
 	    $arrSet = array
 	    (
 	            'id'  => 0,
@@ -246,16 +245,18 @@ class ModuleBotStatisticsTag extends \Frontend
 	        $this->BotName = false;
 	        return false;
 	    }
-	    //$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
-	    $this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
-	    if ($this->ModuleBotDetection->BD_CheckBotAgent() || $this->ModuleBotDetection->BD_CheckBotIP()) 
+
+	    if (  \BotDetection\CheckBotAgentSimple::checkAgent( \Environment::get('httpUserAgent') ) 
+	         || \BotDetection\CheckBotIp::checkIP( \Environment::get('ip') )
+	       )
 	    {
-	        //log_message('BotStatus True','debug.log');
+	        //Debug log_message('BotStatus True','debug.log');
 	        $this->BotStatus = true;
 	    }
 	    
-	    $this->BotName = $this->ModuleBotDetection->BD_CheckBotAgentAdvanced();
-	    //log_message('BotName: '.$this->BotName,'debug.log');
+	    $this->BotName = \BotDetection\CheckBotAgentExtended::checkAgentName( \Environment::get('httpUserAgent') ); 
+	    
+	    //Debug log_message('BotName: '.$this->BotName,'debug.log');
 	    if ($this->BotStatus === true || $this->BotName !== false) 
 	    {
 	        return true;
