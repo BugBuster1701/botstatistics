@@ -1,6 +1,12 @@
 # Changelog Bot Statistics
 
-## [Version 3.2.0](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.2.0%22+is%3Aclosed) (2015-10-10)
+## [Version 3.2.1](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.2.1%22+is%3Aclosed) (2015-10-10)
+
+### New features
+
+- [\#31](https://github.com/BugBuster1701/botstatistics/issues/31) Update translated language files
+
+## [Version 3.2.0](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.2.0%22+is%3Aclosed) (2015-10-10)
 
 ### New features
 
