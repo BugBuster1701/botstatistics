@@ -81,7 +81,7 @@ class ModuleBotStatisticsTag extends \Frontend
 	protected function setBotCounter($bid)
 	{
 	    $visit = false;
-	    $ClientIP = bin2hex(sha1($bid . \Environment::get('remoteAddr'),true)); // sha1 20 Zeichen, bin2hex 40 zeichen
+	    $ClientIP = bin2hex(sha1($bid . \Environment::get('ip'),true)); // sha1 20 Zeichen, bin2hex 40 zeichen
 	    $BlockTime = 60; //Sekunden
 	    $this->CURDATE = date('Y-m-d');
 	    
