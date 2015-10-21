@@ -1,11 +1,18 @@
 # Changelog Bot Statistics
 
+## [Version 3.3.0](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.3.0%22+is%3Aclosed) (2015-10-21)
+
+### New features
+
+- [\#33](https://github.com/BugBuster1701/botstatistics/issues/33) Botdetection 4.0 wieder reimplementieren
+
 ## [Version 3.2.2](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.2.2%22+is%3Aclosed) (2015-10-21)
 
 ### Fixed bugs
 
 - [\#32](https://github.com/BugBuster1701/botstatistics/issues/32) Falsche Abhängigkeit zu Botdetection führt zur weißen Seite
-## [Version 3.2.1](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.2.1%22+is%3Aclosed) (2015-10-10)
+
+## [Version 3.2.1](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.2.1%22+is%3Aclosed) (2015-10-10)
 
 ### New features
 
@@ -17,7 +24,7 @@
 
 - [\#29](https://github.com/BugBuster1701/botstatistics/issues/29) Unterstützung Botdetection 4.0
 
-## [Version 3.1.0](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.1.0%22+is%3Aclosed) (2013-08-27)
+## [Version 3.1.0](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.1.0%22+is%3Aclosed) (2015-10-08)
 
 ### New features
 
@@ -47,7 +54,7 @@
 
 - [\#17](https://github.com/BugBuster1701/botstatistics/issues/17) Fatal error: Exception thrown without a stack frame in Unknown on line 0
 - [\#12](https://github.com/BugBuster1701/botstatistics/issues/12) Blocktime runtersetzen
-- [\#6](https://github.com/BugBuster1701/botstatistics/issues/6) Zählung über InsertTag (cache_...)
+- [\#6](https://github.com/BugBuster1701/botstatistics/issues/6) Zählung über InsertTag (cache_...) 
 
 
 
