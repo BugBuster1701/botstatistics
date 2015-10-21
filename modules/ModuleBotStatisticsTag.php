@@ -246,14 +246,15 @@ class ModuleBotStatisticsTag extends \Frontend
 	        return false;
 	    }
 
-	    $this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
-	    if ($this->ModuleBotDetection->BD_CheckBotAgent() || $this->ModuleBotDetection->BD_CheckBotIP())
+	    if (  \BotDetection\CheckBotAgentSimple::checkAgent( \Environment::get('httpUserAgent') ) 
+	       || \BotDetection\CheckBotIp::checkIP( \Environment::get('ip') )
+	       )
 	    {
 	        //Debug log_message('BotStatus True','debug.log');
 	        $this->BotStatus = true;
 	    }
 	    
-	    $this->BotName = $this->ModuleBotDetection->BD_CheckBotAgentAdvanced(); 
+	    $this->BotName = \BotDetection\CheckBotAgentExtended::checkAgentName( \Environment::get('httpUserAgent') ); 
 	    
 	    //Debug log_message('BotName: '.$this->BotName,'debug.log');
 	    if ($this->BotStatus === true || $this->BotName !== false) 
