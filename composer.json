@@ -45,7 +45,7 @@
 			]
 		},
 		"branch-alias": {
-			"dev-develop4": "3.3.x-dev"
+			"dev-develop": "3.3.x-dev"
 		}
 	}
 }
