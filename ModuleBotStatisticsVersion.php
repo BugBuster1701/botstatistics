@@ -14,6 +14,6 @@
  * @see        https://github.com/BugBuster1701/botstatistics
  */
 
-define('BOTSTATISTICS_VERSION', '3.2');
-define('BOTSTATISTICS_BUILD'  , '2');
+define('BOTSTATISTICS_VERSION', '3.3');
+define('BOTSTATISTICS_BUILD'  , '0');
 
