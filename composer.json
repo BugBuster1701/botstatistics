@@ -21,7 +21,7 @@
 		"php":">=5.3",
 		"contao/core":">=3,<4",
 		"contao-community-alliance/composer-plugin": "*",
-		"bugbuster/botdetection":">3,<5"
+		"bugbuster/botdetection":">=4.0.2,<5"
 	},
 	"autoload":{
 		"classmap":[""]
