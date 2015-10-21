@@ -43,6 +43,9 @@
 			"runonce":[
 				"runonce/runonce.php"
 			]
+		},
+		"branch-alias": {
+			"dev-develop4": "3.3.x-dev"
 		}
 	}
 }
