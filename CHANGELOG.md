@@ -1,5 +1,11 @@
 # Changelog Bot Statistics
 
+## [Version 3.3.1](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.3.1%22+is%3Aclosed) (2016-03-05)
+
+### Fixed bugs
+
+- [\#34](https://github.com/BugBuster1701/botstatistics/issues/34) Contao 3.5.8 - Bereiche lassen sich nicht mehr öffnen
+
 ## [Version 3.3.0](https://github.com/BugBuster1701/botstatistics/issues?q=milestone%3A%22Version+3.3.0%22+is%3Aclosed) (2015-10-21)
 
 ### New features
