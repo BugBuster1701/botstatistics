@@ -1,4 +1,4 @@
-<div class="top_bots limit_height h110 block" style="height: 110px;">
+<div class="top_bots limit_height h110 block">
 <!-- BotTopBots::start -->
 <?php echo $this->BotTopBots; ?>
 <!-- BotTopBots::stop -->
